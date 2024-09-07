@@ -3,9 +3,9 @@ import { useColorMode } from '@docusaurus/theme-common'; //docs: https://v2.docu
 
 const ImageSwitcher = ({lightImageSrc, darkImageSrc}) => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
-
+  const path = isDarkTheme ? darkImageSrc : lightImageSrc;
   return (
-    <img src={isDarkTheme ? darkImageSrc : lightImageSrc} decoding="async" loading="lazy" alt="logo" className="icone-img-button img_ev3q" ></img>
+    <img src={require({path}).default} decoding="async" loading="lazy" alt="logo" className="icone-img-button img_ev3q" ></img>
   )
 }
 
