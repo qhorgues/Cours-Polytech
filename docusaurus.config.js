@@ -16,15 +16,15 @@ export default {
   favicon: 'img/logo.svg',
 
   // Set the production url of your site here
-  url: 'https://qhorgues.github.io/',
+  url: 'https://qhorgues.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Quentin Horgues', // Usually your GitHub org/user name.
-  projectName: 'Cours Polytech', // Usually your repo name.
+  organizationName: 'qhorgues', // Usually your GitHub org/user name.
+  projectName: 'Cours-Polytech', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
