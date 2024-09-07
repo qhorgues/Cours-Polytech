@@ -72,7 +72,7 @@ export default {
 
   stylesheets: [
     {
-      href: '/katex/katex.min.css',
+      href: '@site/katex/katex.min.css',
       type: 'text/css',
     },
   ],
