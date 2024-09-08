@@ -41,7 +41,7 @@ $$
 Faisons le changement de variable $i=k+1$ dans la première somme, puis renommons $i$ en $k$ :
 
 $$
-(a+b)^{n+1} = \sum_{k=1}^{n+1} \binom{n}{k-1} a^{k} b^{n-k+1} 
+(a+b)^{n+1} = \sum_{k=1}^{n+1} \binom{n}{k-1} a^{k} b^{n-k+1}
 + \sum_{k=0}^n \binom{n}{k} a^k b^{n-k+1}
 $$
 
@@ -49,13 +49,10 @@ Isolons le terme $k=n+1$ de la première somme et le terme $k=0$ de la seconde, 
 
 $$
 (a+b)^{n+1} = \binom{n}{n}a^{n+1}b^0
-$$
-$$
-+ \sum_{k=1}^{n} \left( \binom{n}{k-1} + \binom{n}{k} \right) a^{k} b^{n-k+1}
-$$
-$$
++ \sum_{k=1}^{n} \left( \binom{n}{k-1} + \binom{n}{k} \right)a^{k} b^{n-k+1}
 + \binom{n}{0}a^0b^{n+1} 
 $$
+
 Comme $\binom{n}{k-1}+\binom{n}{k}=\binom{n+1}{k}, \binom{n}{n}=\binom{n+1}{n+1}$ et $\binom{n}{0}=\binom{n+1}{0}$ :
 
 $$
