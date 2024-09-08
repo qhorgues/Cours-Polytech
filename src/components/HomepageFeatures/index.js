@@ -32,11 +32,11 @@ function Matiere({ scale, fill, id, Svg, title, link }) {
   }
   return (
     <article className="col col--6 margin-bottom--lg">
-      <Link className="card padding--lg cardContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module card-img-button"
+      <Link className="card padding--lg card-img-button"
         to={link}>
         <Svg transform={"scale(" + scale + ") translate(0 11)"} fill={fill} id={id} role="img" />
         <div className="text-img-button">
-          <h2 className="text--truncate cardTitle_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module" style={{color: fill}}>
+          <h2 className="text--truncate " style={{color: fill}}>
             {title}
           </h2>
         </div>
@@ -48,7 +48,7 @@ function Matiere({ scale, fill, id, Svg, title, link }) {
 export default function HomepageFeatures() {
   return (
     <article className="list_content margin-top--lg">
-      <section className="list-item row list_node_modules-@docusaurus-theme-classic-lib-theme-DocCategoryGeneratedIndexPage-styles-module">
+      <section className="list-item row">
         {ListMatiere.map((props, idx) => (
           <Matiere key={idx} {...props} />
         ))}
