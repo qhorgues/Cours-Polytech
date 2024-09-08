@@ -31,7 +31,7 @@
 
 .text-img-button {
   margin-left: 130px;
-  transform: translateY(-25px);
+  transform: translateY(35px);
 }
 
 .card-img-button {
@@ -47,6 +47,19 @@
   fill: black;
   color: black;
 }
+
+.img-button {
+  transform: translateY(-5px);
+}
+
+
+
+.scaling-svg-container {
+  position: relative; 
+  height: 0; 
+  width: 100%; 
+  padding: 0;
+ }
 
 [data-theme='dark'] .card-img-button
 {

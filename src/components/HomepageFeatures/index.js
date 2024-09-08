@@ -26,7 +26,9 @@ function Matiere({ scale, id, Svg, title, link }) {
     <article className="col col--6 margin-bottom--lg">
       <Link className="card padding--lg card-img-button"
         to={link}>
-        <Svg transform={"scale(" + scale + ") translate(0 11)"} id={id} role="img" />
+          <div className='scaling-svg-container'>
+            <Svg id={id} role="img" className="img-button"/>
+          </div>
         <div className="text-img-button">
           <h2 className="text--truncate">
             {title}
