@@ -29,6 +29,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+.hero {
+  background-color: var(--ifm-color-background-color);
+  color: var(--ifm-color-primary)
+}
+
 .text-img-button {
   margin-left: 80px;
   transform: translateY(15px);
