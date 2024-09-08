@@ -30,13 +30,13 @@
 }
 
 .text-img-button {
-  margin-left: 130px;
-  transform: translateY(35px);
+  margin-left: 100px;
+  transform: translateY(15px);
 }
 
 .card-img-button {
   padding: 1rem !important;
-  height: 140px;
+  height: 100px;
   --ifm-link-color: var(--ifm-color-emphasis-800);
   --ifm-link-hover-color: var(--ifm-color-emphasis-700);
   --ifm-link-hover-decoration: none;
