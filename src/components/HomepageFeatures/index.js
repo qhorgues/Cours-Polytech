@@ -20,23 +20,15 @@ const ListMatiere = [
 ];
 
 
-function Matiere({ scale, fill, id, Svg, title, link }) {
+function Matiere({ scale, id, Svg, title, link }) {
 
-  // Custom code to change the fill color of the Cloud Arrow Up SVG
-  // depending on if user is in dark/light mode
-  const { colorMode } = useColorMode()
-  if (colorMode === 'light') {
-    fill = 'black' // Battleship Gray
-  } else if (colorMode === 'dark') {
-    fill = 'white'
-  }
   return (
     <article className="col col--6 margin-bottom--lg">
       <Link className="card padding--lg card-img-button"
         to={link}>
-        <Svg transform={"scale(" + scale + ") translate(0 11)"} fill={fill} id={id} role="img" />
+        <Svg transform={"scale(" + scale + ") translate(0 11)"} id={id} role="img" />
         <div className="text-img-button">
-          <h2 className="text--truncate " style={{color: fill}}>
+          <h2 className="text--truncate">
             {title}
           </h2>
         </div>

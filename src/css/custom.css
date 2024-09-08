@@ -44,6 +44,14 @@
   border: 1px solid var(--ifm-color-emphasis-200);
   transition: all var(--ifm-transition-fast) ease;
   transition-property: border, box-shadow;
+  fill: black;
+  color: black;
+}
+
+[data-theme='dark'] .card-img-button
+{
+  fill: white;
+  color: white;
 }
 
 .card-img-button:hover {
