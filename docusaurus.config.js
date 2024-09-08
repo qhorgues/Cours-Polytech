@@ -12,7 +12,7 @@ import rehypeKatex from 'rehype-katex';
 // const config = {
 export default {
   title: 'Cours de Polytech',
-  tagline: '',
+  tagline: 'Notes de cours de Quentin Horgues',
   favicon: '/img/logo.svg',
 
   // Set the production url of your site here
