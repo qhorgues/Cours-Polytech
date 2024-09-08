@@ -13,7 +13,7 @@ import rehypeKatex from 'rehype-katex';
 export default {
   title: 'Cours de Polytech',
   tagline: '',
-  favicon: 'img/logo.svg',
+  favicon: '/img/logo.svg',
 
   // Set the production url of your site here
   url: 'https://qhorgues.github.io',
@@ -25,10 +25,10 @@ export default {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'qhorgues', // Usually your GitHub org/user name.
   projectName: 'Cours-Polytech', // Usually your repo name.
-
-  onBrokenLinks: 'throw',
+  
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-
+  
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -36,6 +36,13 @@ export default {
     defaultLocale: 'fr',
     locales: ['fr'],
   },
+  
+  stylesheets: [
+    {
+      href: '/Cours-Polytech/katex/katex.min.css',
+      type: 'text/css',
+    },
+  ],
 
   presets: [
     [
@@ -70,17 +77,16 @@ export default {
   //     }],
   //   ],
 
-  stylesheets: [
-    {
-      href: '@site/katex/katex.min.css',
-      type: 'text/css',
-    },
-  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
+      colorMode: {
+        //defaultMode: 'light',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
+      },
       navbar: {
         title: 'Cours de Polytech',
         logo: {

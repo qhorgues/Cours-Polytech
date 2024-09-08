@@ -29,17 +29,9 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-.icone-img-button {
-  width: 110px;
-  height: 110px;
-  border: 2px solid var(--color-text);
-  transform: translateY(-30px), translateX(-30px);
-  border-radius: 55px;
-}
-
 .text-img-button {
-  transform: translateY(-75px);
   margin-left: 130px;
+  transform: translateY(-25px);
 }
 
 .card-img-button {
