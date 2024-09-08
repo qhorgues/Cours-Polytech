@@ -6,7 +6,7 @@ description: "Le Binome de Newton"
 # Chapitre 1 : Binome de Newton
 
 ## Binome de newton
-:::tip[Démonstration]
+:::info[Démonstration]
 Soit ($a$, $b$) $\in$ $\mathbb{R}^2$. Pour démontrer la formule du binôme de Newton, nous allons procéder par récurrence sur $n$.
 
 L'hypothèse de réccurence $H_n$ au rang $n \in \mathbb{N}$
