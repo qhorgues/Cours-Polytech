@@ -7,7 +7,7 @@ const ImageSwitcher = ({lightImageSrc, darkImageSrc}) => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   const path = (isDarkTheme ? darkImageSrc : lightImageSrc);
   return (
-    <img src={useBaseUrl({path})} decoding="async" loading="lazy" alt="logo" className="icone-img-button img_ev3q" ></img>
+    <img src={require('@site/static/'+{path})} decoding="async" loading="lazy" alt="logo" className="icone-img-button img_ev3q" ></img>
   )
 }
 
