@@ -4,23 +4,27 @@ import Link from '@docusaurus/Link';
 
 const ListMatiere = [
   {
-    scale: 1.8,
     id: 'maths',
     title: 'Mathématiques',
     Svg: require('@site/static/img/math-ico.svg').default,
     link: '/docs/category/ensemble-des-chapitres',
   },
   {
-    scale: 1.8,
     id: 'info',
     title: 'Informatiques',
     Svg: require('@site/static/img/info-ico.svg').default,
     link: '/docs/category/ensemble-des-chapitres-1',
   },
+  {
+    id: 'en',
+    title: 'Anglais',
+    Svg: require('@site/static/img/en-ico.svg').default,
+    link: '/docs/category/ensemble-des-chapitres-2',
+  },
 ];
 
 
-function Matiere({ scale, id, Svg, title, link }) {
+function Matiere({ id, Svg, title, link }) {
 
   return (
     <article className="col col--6 margin-bottom--lg">

@@ -111,6 +111,12 @@ export default {
             position: 'left',
             label: 'Informatiques',
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'anglSidebar',
+            position: 'left',
+            label: 'Anglais',
+          },
         ],
       },
       prism: {
