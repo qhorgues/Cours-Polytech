@@ -113,6 +113,12 @@ export default {
           },
           {
             type: 'docSidebar',
+            sidebarId: 'algoSidebar',
+            position: 'left',
+            label: 'Algorithmiques',
+          },
+          {
+            type: 'docSidebar',
             sidebarId: 'anglSidebar',
             position: 'left',
             label: 'Anglais',
