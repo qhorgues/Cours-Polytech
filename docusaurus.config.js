@@ -109,13 +109,13 @@ export default {
             type: 'docSidebar',
             sidebarId: 'progSidebar',
             position: 'left',
-            label: 'Programmations',
+            label: 'Programmation',
           },
           {
             type: 'docSidebar',
             sidebarId: 'algoSidebar',
             position: 'left',
-            label: 'Algorithmiques',
+            label: 'Algorithmique',
           },
           {
             type: 'docSidebar',
