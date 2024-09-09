@@ -25,6 +25,7 @@ export default {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'qhorgues', // Usually your GitHub org/user name.
   projectName: 'Cours-Polytech', // Usually your repo name.
+  trailingSlash: false,
   
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
