@@ -107,9 +107,9 @@ export default {
           },
           {
             type: 'docSidebar',
-            sidebarId: 'infoSidebar',
+            sidebarId: 'progSidebar',
             position: 'left',
-            label: 'Informatiques',
+            label: 'Programmations',
           },
           {
             type: 'docSidebar',

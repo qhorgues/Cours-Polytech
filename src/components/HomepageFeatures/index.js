@@ -11,13 +11,13 @@ const ListMatiere = [
   },
   {
     id: 'info',
-    title: 'Informatiques',
-    Svg: require('@site/static/img/info-ico.svg').default,
+    title: 'Programmation',
+    Svg: require('@site/static/img/prog-ico.svg').default,
     link: '/docs/category/ensemble-des-chapitres-1',
   },
   {
     id: 'algo',
-    title: 'Algorithmiques',
+    title: 'Algorithmique',
     Svg: require('@site/static/img/algo-ico.svg').default,
     link: '/docs/category/ensemble-des-chapitres-2',
   },
