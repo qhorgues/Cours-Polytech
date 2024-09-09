@@ -16,10 +16,16 @@ const ListMatiere = [
     link: '/docs/category/ensemble-des-chapitres-1',
   },
   {
+    id: 'algo',
+    title: 'Algorithmiques',
+    Svg: require('@site/static/img/algo-ico.svg').default,
+    link: '/docs/category/ensemble-des-chapitres-2',
+  },
+  {
     id: 'en',
     title: 'Anglais',
     Svg: require('@site/static/img/en-ico.svg').default,
-    link: '/docs/category/ensemble-des-chapitres-2',
+    link: '/docs/category/ensemble-des-chapitres-3',
   },
 ];
 
