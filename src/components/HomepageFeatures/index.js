@@ -22,6 +22,12 @@ const ListMatiere = [
     link: '/docs/category/ensemble-des-chapitres-2',
   },
   {
+    id: 'archi',
+    title: 'Architecture',
+    Svg: require('@site/static/img/archi-ico.svg').default,
+    link: '/404',
+  },
+  {
     id: 'en',
     title: 'Anglais',
     Svg: require('@site/static/img/en-ico.svg').default,
