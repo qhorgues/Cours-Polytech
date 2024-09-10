@@ -120,6 +120,12 @@ export default {
           },
           {
             type: 'docSidebar',
+            sidebarId: 'archiSidebar',
+            position: 'left',
+            label: 'Architechture',
+          },
+          {
+            type: 'docSidebar',
             sidebarId: 'anglSidebar',
             position: 'left',
             label: 'Anglais',

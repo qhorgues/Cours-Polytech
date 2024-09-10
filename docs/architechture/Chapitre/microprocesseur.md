@@ -1,6 +1,7 @@
 ---
 position: 1
-description: "Introduction à l'architecture d'un microprocesseur"
+title: Le microprocesseur
+description: Introduction à l'architecture d'un microprocesseur
 ---
 # Cours 1
 
