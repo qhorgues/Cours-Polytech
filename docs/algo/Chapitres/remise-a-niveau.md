@@ -1,5 +1,5 @@
 ---
-position: 1
+sidebar_position: 0
 ---
 
 # Remise à niveau
@@ -83,10 +83,188 @@ $\{ \forall x \in \mathbb{R^*}\ |\ (0 \lt x \le 1) \lor (x \le -1) \}$
 $A \Rightarrow B \Leftrightarrow \bar{A} \lor B$
 
 ## Condition
+
+### Condition SI
 ```
 si expression alors
   ...
 sinon
  ...
 finsi
+```
+
+## Structure répétitive
+
+### Boucle POUR
+
+```
+Variable
+  N,i : entier
+Début
+  pour i de 1 à N par pas de 1 faire
+    bloc
+  finpour
+Fin
+```
+
+### Boucle TANT QUE
+
+```
+Début
+  Tant que condition faire
+    bloc
+  fintantque
+Fin
+```
+
+### Exercices
+
+<u>**Exercice 1:**</u>
+
+**Cas 1**: <br/>
+1 <br/>
+1 <br/>
+2 <br/>
+1 2 <br/>
+3 <br/>
+1 2 3 <br/>
+4 <br/>
+1 2 3 4 <br/>
+
+```
+Variable
+  N,i,j : entier
+Début
+  pour i de 1 à N par pas de 1 faire
+    ecrire(i)
+    ecrire(retourner à la ligne)
+    pour j de 1 à i par pas de 1 faire
+      ecrire(j + " ")
+    finpour
+    ecrire(retourner à la ligne)
+  finpour
+Fin
+```
+
+**Cas 2**: <br/>
+1 <br/>
+1 <br/>
+2 <br/>
+2 4 <br/>
+3 <br/>
+3 6 9 <br/>
+4 <br/>
+4 8 12 16 <br/>
+
+```
+Variable
+  N,i,j : entier
+Début
+  pour i de 1 à N par pas de 1 faire
+    ecrire(i)
+    ecrire(retourner à la ligne)
+    pour j de 1 à i par pas de 1 faire
+      ecrire(j*i + ' ')
+    finpour
+    ecrire(retourner à la ligne)
+  finpour
+Fin
+```
+
+**Cas 3**: <br/>
+1 <br/>
+e <br/>
+2 <br/>
+de <br/>
+3 <br/>
+cde <br/>
+4 <br/>
+bcde <br/>
+
+```
+Variable
+  i,j : entier
+  chr : chaine
+Début
+  chr <- "abcde"
+  pour i de 1 à 4 par pas de 1 faire
+    ecrire(i)
+    ecrire(retourner à la ligne)
+    pour j de 1 à i par pas de 1 faire
+      ecrire(chr[4-i+j])
+    finpour
+    ecrire(retourner à la ligne)
+  finpour
+Fin
+```
+
+**Cas 4**: <br/>
+1 <br/>
+e <br/>
+2 <br/>
+ed <br/>
+3 <br/>
+edc <br/>
+4 <br/>
+edcb <br/>
+
+```
+Variable
+  i,j : entier
+  chr : chaine
+Début
+  chr <- "abcde"
+  pour i de 1 à 4 par pas de 1 faire
+    ecrire(i)
+    ecrire(retourner à la ligne)
+    pour j de 0 à i-1 par pas de 1 faire
+      ecrire(chr[4-j])
+    finpour
+    ecrire(retourner à la ligne)
+  finpour
+Fin
+```
+
+* Ecrire un algorithme qui affiche un entier de 5 chiffres inversé.<br/>
+Exemple: Si l'entier est 56789 on doit afficher 98765
+
+```
+Variable
+  val : entier
+Début
+  lire(val)
+  tant que val > 0 faire
+    ecrire(val mod 10)
+    val <- val / 10
+  finpour
+Fin
+```
+
+<u>**Exercice 2:**</u>
+
+Décrire les spécifications puis donner l'algorithme qui permet d'écrire les secondes exprimées en un nombre entier saisie au clavier, sous la forme
+  X h : Y m : Z sec
+
+```
+Entrée:
+  time : entier
+Précondition:
+  time > 0
+Sortie
+  Aucune
+Postcondition:
+  Affiche le temps décomposé en heure minute et seconde
+
+Variable
+  time : entier
+  h : entier
+  m : entier
+  s : entier
+Début
+  lire(time)
+  h <- time / 3600
+  m <- (time mod 3600) / 60
+  s <- (time mod 3600) mod 60
+  ecrire(h + ' h : ' + m + ' m : ' + s + ' sec')
+Fin
 ```
