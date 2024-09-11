@@ -357,9 +357,10 @@ Sortie:
 
 Post condition:
 ```
-$$
+$
+\displaystyle
 S = \sum_{i=1}^n i^2
-$$
+$
 ```
 Variables:
   i : entier
