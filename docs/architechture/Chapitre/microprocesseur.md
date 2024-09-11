@@ -1,5 +1,5 @@
 ---
-position: 1
+sidebar_position: 1
 title: Le microprocesseur
 description: Introduction à l'architecture d'un microprocesseur
 ---
@@ -18,6 +18,8 @@ Actionneurs<-->Processus;
 Detecteur<-->Processus;
 Detecteur-->Microprocesseur;
 ```
+
+---
 
 ```mermaid
 block-beta
@@ -44,6 +46,8 @@ block-beta
   group2---id7("bud de données")
   group4-->id6("bus d'adresse")
 ```
+
+---
 
 ```mermaid
 block-beta
