@@ -7,22 +7,65 @@ description: Introduction à l'architecture d'un microprocesseur
 
 # Architecture d'un microprocesseur
 
-_schéma 1_
 ```mermaid
 graph TD;
-Tableau-de-commande-->Interface;
+A[Tableau de commande]-->B[Interface];
 Memoire-->Microprocesseur;
-Interface-->Microprocesseur;
-Microprocesseur-->Interface.;
-Interface.-->Actionneurs;
+B-->Microprocesseur;
+Microprocesseur-->C[Interface];
+C-->Actionneurs;
 Actionneurs<-->Processus;
 Detecteur<-->Processus;
 Detecteur-->Microprocesseur;
 ```
 
-_schéma 2_
+```mermaid
+block-beta
+  columns 3
+  block:group1:3
+    columns 3
+    block:group2:1
+      columns 1
+      Accumulateur
+      id2(" ")
+      id1("Décodeur d'instruction")
+    end
+    block:group3:1
+      columns 1
+      id3("Logique contrôle")
+    end
+    block:group4:1
+      columns 1
+      ALU
+      id4("Registre Index")
+      id5("Compteur de programme")
+    end
+  end
+  group2---id7("bud de données")
+  group4-->id6("bus d'adresse")
+```
 
-_schema 3_
+```mermaid
+block-beta
+  columns 3
+  id4("Bus de données"):3
+  id4-->id1
+  id4-->id2
+  id4-->id3
+
+  id1("Microprocesseur"):1
+  id2("Mémoire"):1
+  id3("Entrée/Sortie"):1
+
+  id6("bus d'adresse"):3
+  id6-->id1
+  id6-->id1
+  id6-->id3
+  id7("bus de commande"):3
+  id7-->id1
+  id7-->id1
+  id7-->id3
+```
 
 
 ## 3 éléments fondamentaux
@@ -30,7 +73,7 @@ _schema 3_
 * Une unité arithmétique et logique (UAL)
 * Un accumulateur
 * Des registres, dont les appelations sont
-  - Le compteur d'instruction (CI)
+  - Le compteur d'instruction (PC)
   - Le registre d'état (status)
   - Le registre d'instruction (RI)
   - Le registre d'adresse (RA)
@@ -38,7 +81,7 @@ _schema 3_
 
 ## 4004, Le premier processeur INTEL (1971)
 
-_schéma 4004_
+![intel 4004](/img/archi/intel4004.png)
 
 ## Code machine
 
@@ -54,7 +97,7 @@ _schéma 4004_
 
 ## Pile 
 
-L'ors de l'appel d'une fonction la pile sauvegarde l'adresse avant l'appel d'une fonction, appel de fonction qui vient écraser dans le [CI](#3-éléments-fondamentaux) l'adresse d'une instruction par l'adresse d'une autre instruction, une fois le code éxécuté on bascule l'adresse en top de pile dans le [CI](#3-éléments-fondamentaux) pour revenir au code appelant
+L'ors de l'appel d'une fonction la pile sauvegarde l'adresse avant l'appel d'une fonction, appel de fonction qui vient écraser dans le [PC](#le-compteur-dinstruction-pc) l'adresse d'une instruction par l'adresse d'une autre instruction, une fois le code éxécuté on bascule l'adresse en top de pile dans le [PC](#le-compteur-dinstruction-pc) pour revenir au code appelant
 
 ## Unité arithmétique et logique (ALU)
 
