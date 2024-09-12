@@ -22,7 +22,7 @@ On appelle ***algorithme*** tout procédé de résolution d'un problème en un n
 :::
 
 :::note[Lemme]
-Soit $A$ un alphabet fini. Deux mots $u_1u_2...u_n$ et $v_1v_2...v_n$ de $A^*$ sont égaux si et seulement si $n=m$ et si $\forall i \in [1, n] \ u_i = v_i$
+Soit $A$ un alphabet fini. Deux mots $u_1u_2...u_n$ et $v_1v_2...v_m$ de $A^*$ sont égaux si et seulement si $n=m$ et si $\forall i \in [1, n] \ u_i = v_i$
 :::
 
 ## Variables
