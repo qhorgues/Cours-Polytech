@@ -12,10 +12,9 @@ Soit $n \in \mathbb{N}$
 $$
 I_n = 
 \begin{pmatrix}
-1 &  & & &  (0) \\
- & 1 &  & & \\
- & & & 1 & \\
-(0) & & & & 1
+   1  &        & (0) \\
+      & \ddots &      \\
+ (0)  &        &  1
 \end{pmatrix}
 $$
 
