@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 description: Les bases en algorithmiques
+sidebar_class_name: green
 ---
 
 # Chapitre 1 : Introduction

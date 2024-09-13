@@ -3,6 +3,7 @@
   "position": 1,
   "link": {
     "type": "generated-index",
+    "title": "Algorithmique",
     "description": "L'ensembles des chapitres d'algo de 3A"
   }
 }

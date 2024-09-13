@@ -38,18 +38,12 @@ export default {
     locales: ['fr'],
   },
   
-  stylesheets: [
-    {
-      href: '/Cours-Polytech/katex/katex.min.css',
-      type: 'text/css',
-    },
-  ],
-
+  
   markdown: {
     mermaid: true,
   },
   themes: ['@docusaurus/theme-mermaid'],
-
+  
   presets: [
     [
       'classic',
@@ -61,7 +55,14 @@ export default {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/qhorgues/Cours-Polytech/blob/master/',
-
+          
+        },
+        pages: {
+          
+          path: "src/pages",
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
+          editUrl: 'https://github.com/qhorgues/Cours-Polytech/blob/master/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -70,6 +71,12 @@ export default {
     ],
   ],
   
+  stylesheets: [
+    {
+      href: '/Cours-Polytech/katex/katex.min.css',
+      type: 'text/css',
+    },
+  ],
   // plugins:
   //   [
   //     ['@docusaurus/plugin-content-docs', {
