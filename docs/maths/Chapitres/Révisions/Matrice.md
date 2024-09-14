@@ -227,3 +227,66 @@ $
 \right.
 $
 :::
+
+## Matrice orthogonal
+
+:::note[Définition]
+
+Soit $n \in \mathbb{N},$
+$A \in \mathcal{M}_{n}(\mathbb{K})$
+
+$A$ orthogonale $\Leftrightarrow A \times A^T = I_n$
+:::
+
+### Formes générale des matrices orthogonale de taille 2
+
+:::info[Démonstration]
+$Soit A \in \mathcal{M}_{2}(\mathbb{R})$
+
+$A \times A^T = I_n$
+
+$\Leftrightarrow 
+\begin{pmatrix}
+    a & c \\
+    b & d
+\end{pmatrix}
+\times
+\begin{pmatrix}
+    a & b \\
+    c & d
+\end{pmatrix}
+= \begin{pmatrix}
+    1 & 0 \\
+    0 & 1
+\end{pmatrix}
+$
+
+$\Leftrightarrow
+\left\{
+\begin{aligned}
+    & a^2 + c^2 = 1 \\
+    & ab + cd = 0 \\
+    & b^2 + d^2 = 1 \\
+\end{aligned}
+\right.$
+
+$\exist\ \theta \in [0,2\pi]\ tq\ a = \cos{\theta}, c = \sin{\theta}$ <br/>
+$\exist\ \varphi \in [0,2\pi]\ tq\ b = \cos{\varphi}, d = \sin{\varphi}$
+
+Or $\cos{\theta}\cos{\varphi} + \sin{\theta}\sin{\varphi} = 0$ <br/>
+$\Leftrightarrow \cos({\theta - \varphi}) = 0$
+
+De plus $\theta - \varphi = \frac{\pi}{2} + k\pi$ <br/>
+$\Leftrightarrow \varphi = \theta - \frac{\pi}{2} + k\pi$
+
+Donc :<br/>
+$
+A = 
+\begin{pmatrix}
+         \cos{\theta}      & \sin{\theta} \\
+    -\epsilon \sin{\theta} & \epsilon \cos{\theta} 
+\end{pmatrix},
+\textnormal{avec }\epsilon \in \{-1,1\}
+$
+
+:::
