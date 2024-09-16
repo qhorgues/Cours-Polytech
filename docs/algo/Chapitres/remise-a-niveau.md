@@ -268,3 +268,165 @@ Début
   ecrire(h + ' h : ' + m + ' m : ' + s + ' sec')
 Fin
 ```
+
+## Structure de données
+
+### Tableau
+
+Un tableau $T$ est un ensemble de _$n$_ variables de même type : <br/>
+$$
+T = (e_1, e_2, \dots, e_n)
+$$
+
+|Valeur|$e_1$|$e_2$|$e_3$|$\dots$|$e_n$|
+|------|-----|-----|-----|-------|-----|  
+|Indice|  0  |  1  |  2  |$\dots$|$n-1$|
+
+### Structure
+
+```
+Type nomType = Structure
+                  champ_1 : type_du_champ_1
+                  ...
+                  champ_k : type_du_champ_k
+                Finstructure
+```
+
+#### Taille d'une structure
+Soit $S$ une structure et $s \in S$ les champs de notre structure
+$$
+\textnormal{taille}(S) = \sum_{s \in S} \textnormal{taille}(s)
+$$
+
+#### Opération sur les structures
+Soit $A, B \in S$ <br/>
+Soit $s_1,s_2,\dots,s_n \subset S$ <br/>
+On peut faire les opérations suivantes : <br/>
+
+##### Afféctation
+$B \leftarrow A$ <br/>
+$A.s_1 \leftarrow x$
+
+##### Egalité
+
+$A = B$
+
+##### Inégalité
+:::warning
+$A \lt B, A \gt B, A \le B\ \textnormal{et}\ A \ge B$ ne sont pas valide il n'existe pas d'ordre totale sur les structures
+:::
+
+## Alias
+
+Type Vecteur = Tableau[$0 \dots n-1$] de Réel
+
+$\Rightarrow$ Tab : Tableau[$0 \dots n-1$] de Réel <br/>
+$\Leftrightarrow$ Tab : Vecteur
+
+## Module : Fonction / Procédure
+
+### Fonction
+Une fonction est une bloc de traitement renvoyant un résultat.
+```
+Fonction nom_fonction (x : type_donnée, y : type_donnée ...) Résultat type_résultat
+  Variable:
+    .
+    .
+    .
+  Début
+    .
+    .
+    .
+  Fin
+Finfonction
+```
+
+### Procédure
+
+Une procédure et un bloc d'instruction éfféctuant un bloc de code ne renvoyant pas de résultat
+
+Une fonction est une bloc de traitement renvoyant un résultat.
+```
+Procédure nom_fonction (Donnée x : type_donnée, Donnée/Résultat y : type_donnée ...)
+  Variable:
+    .
+    .
+    .
+  Début
+    .
+    .
+    .
+  Fin
+Finfonction
+```
+
+## Recheche du maximum
+```
+Fonction max(T : tableau[0..n-1])
+  Variable :
+    T : Tableau [0..99] de réels
+    i : entier (indice d'un élément donné du tableau)
+    max : réel
+    res : entier
+  Début :
+    max <- T[0]
+    res <- 0
+    pour i allant de 1 à n-1 par 1 faire
+      si T[i] > max faire
+        max <- T[i]
+        res <- i
+    fin pour
+    Retourner res
+  Fin
+Finfonction
+```
+
+<u>**Coût**</u> : Recherche en temps linéaire : $\mathcal{O}(n)$
+
+## Recherche dichotomique
+
+Recherhe d'un élément dans un tableau **trié**
+
+```
+Fonction rechercheDicho(T : tableau[0..n-1] Réel, val : Réel)
+  Variable :
+    a : entier
+    b : entier
+    c : entier
+    trouvé : booléen
+    res : entier
+  Début :
+    a <- 0
+    b <- 99
+    res <- -1
+    trouvé <- faux
+    Tantque non trouvé Et b - a >= 0 faire
+      c <- a + (b - a) / 2
+      Si val > T[c] faire
+        a < c+1
+      Sinon si val < T[c] faire
+        b < c-1
+      Sinon faire
+        trouvé <- vrai
+        res <- c
+      Finsi
+    Fintantque
+    Retourner res
+  Fin
+Finfonction
+```
+
+<u>**Coût**</u> : Recherche en temps logarithmique : $\mathcal{O}(\log_2{n})$
+
+
+## Portée des variables
+
+### Globale
+Une variable dites de porté globale, cela signifie qu'elle est disponible pour l'ensemble du programme
+
+### Locale
+Une variable dites locale est une variable dont la porté est limité au bloc d'instruction de la déclaration
+
+## Pointeurs
+
+Chaque fonction à son propre éspace mémoire **indépendamant** des autres fonctions
