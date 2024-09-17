@@ -131,6 +131,9 @@ Fin
 4 <br/>
 1 2 3 4 <br/>
 
+<details> 
+  <summary>Correction</summary>
+    <div>
 ```
 Variable
   N,i,j : entier
@@ -145,6 +148,8 @@ Début
   finpour
 Fin
 ```
+  </div>
+</details>
 
 **Cas 2**: <br/>
 1 <br/>
@@ -156,6 +161,9 @@ Fin
 4 <br/>
 4 8 12 16 <br/>
 
+<details> 
+  <summary>Correction</summary>
+    <div>
 ```
 Variable
   N,i,j : entier
@@ -170,6 +178,8 @@ Début
   finpour
 Fin
 ```
+  </div>
+</details>
 
 **Cas 3**: <br/>
 1 <br/>
@@ -181,6 +191,9 @@ cde <br/>
 4 <br/>
 bcde <br/>
 
+<details> 
+  <summary>Correction</summary>
+    <div>
 ```
 Variable
   i,j : entier
@@ -197,6 +210,8 @@ Début
   finpour
 Fin
 ```
+  </div>
+</details>
 
 **Cas 4**: <br/>
 1 <br/>
@@ -208,6 +223,9 @@ edc <br/>
 4 <br/>
 edcb <br/>
 
+<details> 
+  <summary>Correction</summary>
+    <div>
 ```
 Variable
   i,j : entier
@@ -224,10 +242,15 @@ Début
   finpour
 Fin
 ```
+  </div>
+</details>
 
 * Ecrire un algorithme qui affiche un entier de 5 chiffres inversé.<br/>
 Exemple: Si l'entier est 56789 on doit afficher 98765
 
+<details> 
+  <summary>Correction</summary>
+    <div>
 ```
 Variable
   val : entier
@@ -239,12 +262,17 @@ Début
   finpour
 Fin
 ```
+  </div>
+</details>
 
 <u>**Exercice 2:**</u>
 
 Décrire les spécifications puis donner l'algorithme qui permet d'écrire les secondes exprimées en un nombre entier saisie au clavier, sous la forme
   X h : Y m : Z sec
 
+<details> 
+  <summary>Correction</summary>
+    <div>
 ```
 Entrée:
   time : entier
@@ -268,6 +296,8 @@ Début
   ecrire(h + ' h : ' + m + ' m : ' + s + ' sec')
 Fin
 ```
+</div>
+</details>
 
 ## Structure de données
 
@@ -315,6 +345,164 @@ $A = B$
 :::warning
 $A \lt B, A \gt B, A \le B\ \textnormal{et}\ A \ge B$ ne sont pas valide il n'existe pas d'ordre totale sur les structures
 :::
+
+### Manipuler les tableaux
+
+On peut utiliser les structures et les tableaux pour pour manipuler facilement les tableaux
+
+On connait ici la taille maximal du tableau (100) mais aussi le nombre d'élément présent
+
+
+<u>**Exercice:**</u>
+
+On souhaite gérer des tableaux à maximum 100 entiers saisis par l'utilisateur. Pour un tableau donné, on génèrera un nouveau sans doublon
+* Un module qui permet de saisir les éléments d'un tableau de taille fixée par l'utilisateur inférieur à 100, le module **Saisir**
+* Un module qui trie un tableau dans l'orde croissantselon la procédure de tri pair-impair, le module **Trier**
+* Un module qui extrait depuis un tableau donné trié un nouveau tableau sans les doublant, le module **Générer**
+* Le module principale
+
+<details> 
+  <summary>Correction</summary>
+    <div>
+
+```
+type tab = Structure
+      T : tableau [0...99] d'entiers
+      IndMax : entier
+    Finstructure
+```
+
+**Module Principale**
+```
+Procédure Principale()
+  Variables
+    Tab : Table
+    Ind : entier
+  Début
+    ecrire(Saisir le nb d'info tq inférieur à 99)
+    Faire
+      lire(Tab.IndMax)
+    Tantque ((Tab.IndMax < 0) OU (Tab.IndMax > 99))
+    Saisir(Tab)
+  Fin
+Finprocédure
+```
+
+**Module Saisir**
+```
+Procédure Saisir (Donnée/Résulat Tab : Table)
+Variable
+  i : entier
+Début
+  Por iallant de 0 à  Tab.IndMax par 1 faire
+    lire(tab.T[i])
+  Finpour
+Fin
+Finprocédure
+```
+
+**Module trier**
+:::warning
+Cette algorithme nest pas du tout optimal
+:::
+```
+Procédure TriPairImpair (Donnée/Résulat Tab : Table)
+  Variables
+    noTrie : booléen
+    i : entier
+    j : entier
+    tmp : entier
+  Début
+    Faire
+      nonTrie <- Faux
+      Pour i allant de 0 à 1 par pas de 1 faire
+        Pour j allant de i à Tab.IndMax -1 par pas de 2 faire
+          Si Tab.T[j] > Tab.T[j+1] faire
+            tmp <- Tab.T[j]
+            Tab.T[j] <- Tab.T[j+1]
+            Tab.T[j+1] <- tmp
+            nonTrier <- Vrai
+          Finsi
+        Finpour
+      Finpour
+    Tantque nonTrie est Vrai
+  Fin
+Finprocédure
+```
+
+<details> 
+  <summary>Code en C</summary>
+    <div>
+  ```c
+  #include <stdbool.h>
+
+  struct Table
+  {
+    int T[100];
+    int indMax;
+  };
+
+  void TriPairImpair (struct Table* tab)
+  {
+    bool nonTrie;
+    do
+    {
+      nonTrie = false;
+      for (int i = 0; i <= 1; i++)
+      {
+        for (int j = 0; j < tab->indMax; j++)
+        {
+          if (tab->T[j] > tab->T[j+1])
+          {
+            int tmp = tab->T[j];
+            tab->T[j] = tab->T[j+1];
+            tab->T[j+1] = tmp;
+            nonTrie = true;
+          }
+        }
+      }
+    } while (nonTrier);
+  }
+  ```
+    </div>
+</details>
+
+**Le module générer**
+
+```
+Fonction Generer (Donnée Tab : Table, Donnée/Résulat TabBis : Table) Résulat booléen
+  Entrée
+    Tab un tableau trié d'entier
+    TabBis un tableau vide d'entier
+  Precondition
+    Tab est trié par ordre croissant
+  Sortie
+    Vrai si les deux tableaux en entrée etaient identique
+    Faux sinon
+  Postcondition
+    TabBis ne contient aucun doublon
+  
+  Variables
+    i : entier
+    identique : booléen
+  Début
+    identique <- Vrai
+    TabBis.IndMax <- 0
+    TabBis.T[0] <- Tab.T[0]
+    Pour i allant de 1 à Tab.IndMax par pas de 1 faire
+      Si Tab.T[i] != TabBis.T[TabBis.IndMax] faire
+        TabBis.IndMax <- TabBis.IndMax +1
+        TabBis.T[TabBis.IndMax] <- Tab.T[i]
+      Sinon faire
+        identique <- Faux
+      Finsi
+    Finpour
+    Renvoyer identique
+  Fin
+Finfonction
+```
+</div>
+</details>
 
 ## Alias
 
