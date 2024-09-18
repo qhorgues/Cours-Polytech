@@ -95,7 +95,7 @@ $\mathcal{O}(2^n)$ exponentiel
 
 $\mathcal{O}(n!)$ fatoriel
 
-## Calcul del a compléxité en temps
+## Calcul de la compléxité en temps
 
 ### Séquence de traitement
 
