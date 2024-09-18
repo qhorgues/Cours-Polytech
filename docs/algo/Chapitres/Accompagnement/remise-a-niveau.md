@@ -1,5 +1,5 @@
 ---
-sidebar_position: 0
+sidebar_position: 1
 ---
 
 # Remise à niveau
@@ -273,6 +273,7 @@ Décrire les spécifications puis donner l'algorithme qui permet d'écrire les s
 <details> 
   <summary>Correction</summary>
     <div>
+
 ```
 Entrée:
   time : entier
@@ -296,6 +297,7 @@ Début
   ecrire(h + ' h : ' + m + ' m : ' + s + ' sec')
 Fin
 ```
+
 </div>
 </details>
 
@@ -433,6 +435,7 @@ Finprocédure
 <details> 
   <summary>Code en C</summary>
     <div>
+
   ```c
   #include <stdbool.h>
 
@@ -464,6 +467,7 @@ Finprocédure
     } while (nonTrier);
   }
   ```
+
     </div>
 </details>
 
@@ -501,6 +505,7 @@ Fonction Generer (Donnée Tab : Table, Donnée/Résulat TabBis : Table) Résulat
   Fin
 Finfonction
 ```
+
 </div>
 </details>
 

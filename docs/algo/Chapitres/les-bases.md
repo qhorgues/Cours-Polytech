@@ -82,7 +82,8 @@ Par convention on considèreles tailles suivantes :
   - Réel
   - Adresse
 
-<u>**Exemple:**</u> <br/>
+<u>**Exemple:**</u>
+
 ```
 Variables:
   x,y : réels
@@ -385,7 +386,7 @@ jusqu'à condition
 <u>**Exemple:**</u> <br/>
 Soit $T$ un tableau de $n$ entiers <br/>
 Soit $S$ un entier <br/>
-Trouver deux entiers de $T$ dont la somme fair $S$
+Trouver deux entiers de $T$ dont la somme fait $S$
 
 <u>2 cas</u>
 * a) $T$ non trié
@@ -400,5 +401,118 @@ Sortie
   A,B : entier
   exist : booléen
 Post condition
-  A dans T, B dans T et A + B = S
+```
+$\exist\ i \in [0,\dots,n-1], \exist j \in [0 \dots n-1],
+i \neq j, A = T[i], B = T[j]\ \textnormal{et}\ A + B = S$
+```
+Variables
+  trouve : boolén
+Début
+  trouve <- Faux
+  i <- 0
+  Tantque i <= n-2 et non trouve faire
+    j <- i+1
+    Tantque j <= n-1 et non trouve faire
+      Si T[i] + T[j] = S alors
+        A <- T[i]
+        B <- T[j]
+        trouve <- vrai
+      Finsi
+      j <- j+1
+    Fintantque
+    i <- i+1
+  Fintantque
+Fin
+```
+
+## Fonctions, procédures
+### Fonctions
+
+Une fonction est une séquence d'instructions qui est appelée à plusieurs reprises au sein d'un programme plus global
+
+```
+Fonction nom_f (liste des paramètres avec leurs types) : type du résultat
+            <-------- Avec préconditions et post conditions
+  Variables
+    .
+    .
+    .
+  Début
+    .
+    .
+    .
+  Fin
+```
+
+On peut passer les paramètres par adresse ou par valeurs.
+* **Par adresse** : La fonciton agit sur le contenu en mémoire, qui est modifié
+* **Par valeur** : Le contenu en mémoire n'est pas modifié, le paramètre est copié temporairement puis détruit en sortant de la fonction
+
+### Fonction récursives
+
+Une fonction récursive est une fonction qui s'appelle elle-même
+
+<u>**Exemple:**</u>
+Calcul de $n!$
+
+$n! = 1 \times 2 \times \dots \times (n-1) \times n$
+
+$n! = (n-1)! \times n$
+
+:::warning
+Il faut une condition d'arrêt !
+:::
+
+pour $n!$ on dit que si $n=0$ on retourne $1$.
+
+```
+Fonction Factoriel(n : entier) : entier
+  Précondition: n >= 0
+  Sortie : n!
+Début
+  Si n = 0 alors Retrouner(1)
+  Sinon Retourner (Factoriel(n-1) * n)
+  Finsi
+Fin
+```
+
+Une pile est utilisé pour stocker les appels en cours
+
+<u>**Exemple:**</u>
+```mermaid
+graph TD;
+  id1["Factoriel (3)"] --> id2["n=0 ? non --> retourner Factoriel (2) * 3"];
+  id2 --> id3["n = 0 ? non --> retourner Factoriel(1) * 2"]
+  id3 --> id4["n = 0 ? non --> retourner Factoriel(0)*1"]
+  id4 --> id5["n = 0 ? oui --> retourner 1"]
+  id5--1-->id4
+  id4--1-->id3
+  id3--2-->id2
+  id2--6-->id1
+```
+
+```
+Algorithme ProgrammePrincipal
+...
+Variables
+  a, n, produit : entiers
+Début
+  a <- lire()
+  n <- lire()
+  produit <- Multiple (a,n)
+  ecrire('a x n = ',produit)
+Fin
+```
+
+```
+Fonction Multiplie(a, n : entier) : entier
+...
+Variables
+Début
+  Si n = 1 alors
+    retourner (a)
+  Sinon
+    retourner (a + Multiplie(a,n-1))
+  Finsi
+Fin
 ```

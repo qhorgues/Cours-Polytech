@@ -1,0 +1,9 @@
+{
+  "label": "Cours d'accompagnement",
+  "position": 0,
+  "link": {
+    "type": "generated-index",
+    "title": "Accompagnement algorithmique",
+    "description": "Cours d'accompagnement en algorithmique"
+  }
+}
