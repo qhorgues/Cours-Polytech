@@ -31,7 +31,7 @@ const ListMatiere = [
     id: 'en',
     title: 'Anglais',
     Svg: require('@site/static/img/en-ico.svg').default,
-    link: '/docs/category/ensemble-des-chapitres-4',
+    link: '/docs/category/all-english-chapters',
   },
 ];
 

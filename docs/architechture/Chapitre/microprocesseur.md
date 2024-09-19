@@ -103,6 +103,9 @@ block-beta
 
 L'ors de l'appel d'une fonction la pile sauvegarde l'adresse avant l'appel d'une fonction, appel de fonction qui vient écraser dans le [PC](#le-compteur-dinstruction-pc) l'adresse d'une instruction par l'adresse d'une autre instruction, une fois le code éxécuté on bascule l'adresse en top de pile dans le [PC](#le-compteur-dinstruction-pc) pour revenir au code appelant
 
+Sur la pile on peut sauvegarder le contenue de l'accumulateur, du PC, etc...
+Le contexte de microprocesseur avant l'appel
+
 ## Unité arithmétique et logique (ALU)
 
 * Role
@@ -141,6 +144,8 @@ _Schéma_
 * Le RA sert d'interface entre les bus dedonnées interne et le bus des adresses
 * Il "pilote" le bus d'adresses du microprocesseur
 * D'une longeur de $n$ bits
+* Il stocke le code opérande d'une instruction
+  - Exemple : ADD $acc $rdx -> stocke $acc et $rdx
 
 ## Lien entre le PC et le RA
 
@@ -157,6 +162,11 @@ _Schéma_
 * Il reçoit l'information grâce au bus de données auquel il est connecté
 * L'information ainsi stockée est utilisée par l'entité décodeur d'instruction
 
+## Résumé
+On lit une instruction pointé par le PC, on mets l'instruction dans le RI et le contenue de l'instruction dans le RA pendant l'execution de l'instruction le PC va pointé l'instruction suivante. 
+
+Si on fait unsaut dans l'execution on stocke le contenue du PC qui pointe l'instruction suivant le saut dans une pile et on effectue le saut, une foisle bloc d'instruction finie, on récupère le haut de la pile pour la basculer dans le PC 
+
 ## Cycle éxtraction-éxécution
 * Premier temps (1 cycle machine voire plusieurs)
   - Extraction(s) de toute l'information (code opératoire et opérandes) de la mémoire
@@ -172,3 +182,20 @@ _Schéma_
 après traitement sur les données.
 * L'existence de ces résultats permet d'écrire des programmes avec branchements conditionnels
 
+## Les intéruptions
+
+Une interuption est une instruction envoyé dans certain cas
+* Opération illégale
+* Périphérique entrée/sortie
+
+### Gestion l'ors d'un intéruption
+
+* Appel à un sous programme d'intéruption
+  - L'instruction en cours est éxécuté dans la totalité
+  - Le contexte est sauvegardé sur la pile
+    + PC, accu et registre d'état
+  - Contenue du **vecteurd'intéruption** "va" dans le PC
+* En fin de programme d'intéruption
+  - Restitution du contexte
+  - En particulier le PC se voit retourner son contenu présent dans l'interuption
+    + adresse de l'instruction qui devrait s'éxécuter si il n'y avait pas eu d'intéruption
