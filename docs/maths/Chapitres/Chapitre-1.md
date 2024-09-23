@@ -38,4 +38,55 @@ Soit $E$ un ensemble muni d'une loi de composition interne $+$ et d'une loi de c
         + Tout élément $\vec{u}$ de $E$ admet un symétrique pour $+$ dans $E$, noté $-\vec{u}$
         + $+$ est commutative, $\vec{u} + \vec{v} = \vec{v} + \vec{u}$
     - La loi externe vérifie les quatres propriétés suivantes :
-        + $\forall \lambda, \mu \in \mathbb{K}, \forall \vec{u} \in E : \left( \lambda + \mu \right)\dot\vec{u}$
+        + $\forall \lambda, \mu \in \mathbb{K}, \forall \vec{u} \in E : \left( \lambda + \mu \right) \cdot \vec{u}$
+        + $\forall \vec{u} \in E : 1 \cdot \vec{u} = \vec{u}$
+        + $\forall \lambda, \mu \in \mathbb{K}, \forall \vec{u} \in E : (\lambda + \mu) \cdot \vec{u} = \lambda \cdot \vec{u} + \mu \cdot \vec{u}$
+        + $\forall \lambda \in \mathbb{K}, \forall \vec{u}, \vec{v} \in E : \lambda \cdot (\vec{u} + \vec{v}) = \lambda \cdot \vec{u} + \lambda \cdot \vec{v}$
+
+### Exemple d'espace vectoriel
+
+$(\mathbb{R}^2, +, \cdot)$ est un $\mathbb{R}$-espace vectoriel
+
+$(\mathbb{R}^n, +, \cdot)$ est un $\mathbb{R}$-espace vectoriel
+
+$(\mathcal{M}_{m,n}(\mathbb{R}), +, \cdot)$ est un $\mathbb{R}$-espace vectoriel
+
+$(\mathbb{R}_n[X], +, \cdot)$ est un $\mathbb{R}$-espace vectoriel
+
+$(\mathbb{R}[X], +, \cdot)$ est un $\mathbb{R}$-espace vectoriel
+
+$(\mathbb{C}, +, \cdot)$ est un $\mathbb{R}$-espace vectoriel
+
+#### Pour aller plus loin
+
+$(\mathbb{R}^n, +, \cdot)$ : l'ensemble des suites à valeurs dans $\mathbb{R}$ est un $\mathbb{R}$-ev
+
+$(\mathbb{R^R}, +, \cdot)$ : l'ensemble des applications de $\mathbb{R}$ dans $\mathbb{R}$ est un $\mathbb{R}$-ev (l'ensembles des fonctions n'en est pas un : si un fonction n'est pas def sur $\mathbb{R}$ alors elle n'a pas de symétrique)
+
+$(\mathbb{R}^A, +, \cdot)$ : l'ensemble des applications de $A$ dans $\mathbb{R}$ est un $\mathbb{R}$-ev
+
+#### Mais
+
+$\left\{  (x,y) \in \mathbb{R}^2\ |\ xy = 0 \right\}$ n'est pas un $\mathbb{R}$-espace vectoriel (pas stable par somme)
+
+$\left\{  (x,y) \in \mathbb{R}^2\ |\ x \ge 0\ \textnormal{et}\ y \ge 0 \right\}$ n'est pas un $\mathbb{R}$-espace vectoriel (pas stable par le produit externe)
+
+### Proprièté
+
+Etant donné un $\mathbb{K}$-espace vectoriel $(E, +, \cdot), \forall \lambda \in \mathbb{K}, \forall \vec{u} \in E$
+
+* $0 \cdot \vec{u} = \vec{0}$
+* $\lambda \cdot \vec{0} = \vec{0}$
+* $\lambda \cdot \vec{u} = \vec{0} \Leftrightarrow \lambda = 0\ \textnormal{ou}\ \vec{u} = \vec{0}$
+*  $(-1) \cdot \vec{u} = -\vec{u}$
+*  $(-\lambda) \cdot \vec{u} = \lambda \cdot(-\vec{u}) = -\lambda \cdot \vec{u}$
+* L'élément neutre de $\vec{0}$ est unique
+* Le symétrique d'un vecteur pour l'adition est unique
+
+### Combinaison linéaire
+
+Soit $(\vec{u_1}, \vec{u_2}, \dots, \vec{u_n})$ un $k$-upllet de vecteurs d'un $\mathbb{K}$-espace vectoriel E
+
+Une **combinaison linéaire** de $\vec{u_1}, \dots, \vec{u_k}$ est un vecteur $\vec{v}$ tq
+
+il existe $\lambda _1, \dots, \lambda _k$ tq $\displaystyle \vec{v} = \sum_{i=1}^k \lambda _i \vec{u}_i = \lambda _1 \cdot \vec{u}_1 + \lambda _2 \cdot \vec{u}_2 + \dots + \lambda _k \cdot \vec{u}_k$
