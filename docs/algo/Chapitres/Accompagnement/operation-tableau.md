@@ -5,6 +5,192 @@ description: Fonction de base sur les tableaux
 
 # Fonctions sur les tableaux
 
+## Echanger deux éléments dans un tableau
+
+```
+Fonction echangerIndice(tab : Tableau[0...n-1] réels, i : entier, j : entier)
+    Precondition
+        i < n
+        j < m
+    Variable
+        swp : reel
+    Debut
+        swp <- tab[i]
+        tab[i] <- tab[j]
+        tab[j] <- swp
+    Fin
+```
+
+## Inserer un élément
+
+```
+Fonction insertElt(tab: Tableau[0..n-1] reel, n : entier, elt : reel, pos : entier) : Tableau[0..n] de reel
+    Variable
+        nTab : Tableau[0..n]
+        i : entier
+    Debut
+        Pour i de 0 à pos -1 par pas de 1 faire
+            nTab[i] <- tab[i]
+        FinTantque
+        nTab[pos] <- elt
+        Pour i de pos+1 à n faire
+            nTab[pos] <- tab[pos-1]
+        FinPour
+        renvoyer nTab
+    Fin            
+```
+
+## Supprimer un élément en position $i$
+
+```
+Fonction supprimerElt(tab : Tableau[0..n-1], n : entier, pos : entier) : Tableau[0..n-2]
+    Precondition: 
+        pos < n
+    Variable
+        i : entier
+        res : Tableau[0..n-2]
+    Debut
+        i <- 0
+        Pour i allant de 0 à pos-1 par pas de 1 faire
+            res[i] = tab[i]
+        Finpour
+        Pour i allant de pos+1 à n-1 par pas de 1 faire
+            res[i-1] = tab[i]
+        Finpour
+        renvoyer res
+    Fin
+Finfonction
+```
+
+## Le minimum
+
+### En renvoyant la valeur
+
+```
+Fonction minTableau(tab : Tableau[0...n-1] : réel, n : entier) : réel
+    Variable
+        indMin : entier
+        i : entier
+    Début
+        indMin <- 0
+        Pour i de 1 à n-1 par pas de 1 faire
+            Si tab[i] < tab[indMin] faire
+                indMin <- i
+            Finsi
+        Finpour
+        renvoyer tab[indMin]
+    Fin
+```
+
+<details>
+    <summary>Implémentation en C</summary>
+    <div>
+
+```c
+double minTableau(double* tab, int n)
+{
+    int indMin = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (tab[i] < tab[indMin])
+        {
+            indMin = i;
+        }
+    }
+    return tab[indMin];
+}
+```
+    </div>
+</details>
+
+### En renvoyant l'indice
+
+```
+Fonction indMinTableau(tab : Tableau[0...n-1] : réel, n : entier) : réel
+    Variable
+        indMin : entier
+        i : entier
+    Début
+        indMin <- 0
+        Pour i de 1 à n-1 par pas de 1 faire
+            Si tab[i] < tab[indMin] faire
+                indMin <- i
+            Finsi
+        Finpour
+        renvoyer indMin
+    Fin
+```
+
+<details>
+    <summary>Implémentation en C</summary>
+    <div>
+
+```c
+double indMinTableau(double* tab, int n)
+{
+    int indMin = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (tab[i] < tab[indMin])
+        {
+            indMin = i;
+        }
+    }
+    return indMin;
+}
+```
+    </div>
+</details>
+
+
+### En renvoyant les deux plus petites valeurs
+
+```
+Fonction minTableau(tab : Tableau[0...n-1] : réel, n : entier) : (réel, réel)
+    Variable
+        min1, min2 : reel
+        i : entier
+    Début
+        min1 <- inf
+        min2 <- inf
+        Pour i de 0 à n-1 par pas de 1 faire
+            Si tab[i] < min1 faire
+                min2 <- min1
+                min1 <- tab[i]
+            Sinon si tab[i] < min2 faire
+                min2 <- tab[i]
+            Finsi
+        Finpour
+        renvoyer (min1, min2)
+    Fin
+```
+
+### En renvoyant les $m$ plus petites valeurs
+
+```
+Fonction minTableau(tab : Tableau[0...n-1] : réel, n : entier, m : entier) : Tableau[0..m-1] réel
+    Variable
+        i, j : entier
+        valMin : Tableau[0..m-1] réel
+        max, swp: réel
+    Début
+        m <- 2
+        valMin[0] <- tab[0]
+        Pour i de 1 à n-1 par pas de 1 faire
+            max <- tab[i]
+            Pour j de 0 à m-2 par pas de 1 faire
+                Si valMin[j] > max et valMin[j+1] < max faire
+                    swp <- valMin[j]
+                    valMin[j] <- max
+                    max <- swp
+                Finsi
+            Finpour
+            Si valMin[m-1] > max faire
+                valMin[m-1] <- max
+        Finpour
+        renvoyer valMin
+    Fin
+```
 
 ## La moyenne 
 
@@ -141,7 +327,7 @@ Fonction effacerChr(ch : chaine, pos : entier, n : entier) : chaine
         i <- 0
         Pour i allant de 0 à pos-1 par pas de 1 faire
             res[i] = ch[i]
-        Fintantque
+        Finpour
         Pour i allant de pos+1 à n-1 par pas de 1 faire
             res[i-1] = ch[i]
         Finpour
@@ -198,6 +384,7 @@ Fonction nettoie(ch : chaine, n : entier, del : chaine, m : entier) : chaine
             Tantque j < m Et non chrDel faire
                 Si ch[i] = del[j] faire
                     chrDel <- Vrai
+                    j <- j+1
                 Finsi
             Fintantque
             Si non chrDel faire
@@ -207,3 +394,54 @@ Fonction nettoie(ch : chaine, n : entier, del : chaine, m : entier) : chaine
         renvoyer res
     Fin
 Finfonction
+```
+
+## Recherche position d'insertion
+
+```
+Fonction indElt(tab: Tableau[0..n-1] réel, n : entier, elt : réel) : entier
+    Precondition
+        On suppose que le tableau tab est trié
+    Valeur
+        a, b, c : entier
+        nonTrouve : booléen
+    Debut
+        a <- 0
+        b < n-1
+        nonTrouve <- Vrai
+        Tantque nonTrouve b-a >= 0 faire
+            c = (b-a)/2 + a
+            Si tab[c] > elt faire
+                b <- c
+            Sinon si tab[c] < elt faire
+                a <- c
+            Sinon
+                nonTrouve <- Faux
+                c <-c+1
+                Tantque c < n et tab[c] = elt faire
+                    c <- c+1
+                Fintantque
+            Finsi
+        Fintantque
+        renvoyer c
+    Fin
+```
+
+Avec cette fonction et la fonction insérer ont peut construire une fonction de tri
+
+## Vérifier si un tableau est trié
+
+```
+Fonction estTrié(tab : Tableau[0..n-1], n : entier) : booleen
+    Variable
+        trie : booleen
+        i : entier
+    Debut
+        Tantque trie et i < n-1 faire
+            Si tab[i] > tab[i+1] faire
+                trie <- Faux
+            Fintantque
+            i <- i+1
+        Fintantque
+        renvoyer trie
+```
