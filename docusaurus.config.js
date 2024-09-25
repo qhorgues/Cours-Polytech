@@ -13,7 +13,7 @@ import rehypeKatex from 'rehype-katex';
 export default {
   title: 'Cours de Polytech',
   tagline: 'Notes de cours de Quentin Horgues',
-  favicon: '/img/logo.svg',
+  favicon: '/img/polytech-ico.svg',
 
   // Set the production url of your site here
   url: 'https://qhorgues.github.io',
@@ -110,7 +110,7 @@ export default {
         title: 'Cours de Polytech',
         logo: {
           alt: 'Logo',
-          src: 'img/logo.svg',
+          src: 'img/polytech-ico.svg',
         },
         hideOnScroll: true,
         items: [
@@ -143,6 +143,11 @@ export default {
             sidebarId: 'anglSidebar',
             position: 'left',
             label: 'Anglais',
+          },
+          {
+            href: 'https://cas.univ-tours.fr/cas/login?service=https://ent.univ-tours.fr/uPortal/Login',
+            label: 'ENT',
+            position: 'right',
           },
         ],
       },
