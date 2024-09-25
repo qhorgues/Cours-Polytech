@@ -35,11 +35,91 @@ On utilise l'opérateur @ pour accéder à l'adresse mémoire
 
 <u>**Exemple:**</u>
 
-Variables: <br/>
-    toto : entier <br/>
-    mon_ptr : $\uparrow$entier <br/>
-    titi : entier <br/>
-Début <br/>
-    toto $\leftarrow$ 15 <br/>
-    mon_ptr $\leftarrow$ @toto <br/>
-    titi $\leftarrow$ ($\uparrow$mon_ptr)+2
+<u>Variables:</u> <br/>
+&emsp; toto : entier <br/>
+&emsp; mon_ptr : $\uparrow$entier <br/>
+&emsp; titi : entier <br/>
+<u>Début</u> <br/>
+&emsp; toto $\leftarrow$ 15 <br/>
+&emsp; mon_ptr $\leftarrow$ @toto <br/>
+&emsp; titi $\leftarrow$ ($\uparrow$mon_ptr)+2 <br/>
+<u>Fin</u>
+
+#### Avec l'allocation dynamique
+
+L'allocation dynamique est la réservation d'un emplacement mémoire dans une zone dynamique. On réserve cet emplacement, on l'utilise et ensuite on la libère.
+
+On accède aux variables par leur adresse.
+
+On stocke les adresses des variables pas leurs noms
+
+<u>**Exemple:**</u>
+
+<u>Variables:</u> <br/>
+&emsp; ptr_toto : $\uparrow$entier <br/>
+<u>Début</u> <br/>
+&emsp; ptr_toto $\leftarrow$ allouer(entier) <br/>
+&emsp; $\downarrow$ <br/>
+&emsp; Contient l'adresse de l'entier dans la mémoire alloué
+
+:::warning
+Allouer ne veut pas dire initialiser
+:::
+
+On libère la mémoire avec `libérer(ptr_toto)`
+
+:::warning
+* On ne peut pas libérer un pointeur qui vaut `NIL`
+* On ne peut pas libérer un pointeur déjà libéré
+* On ne peut accéder à une zone libéré
+:::
+
+
+<u>**Exemple: Passage par adresse/par valeur**</u>
+
+Algorithme Principale
+```
+Variable
+    i,j : entiers
+    T : tableau[0..2] entiers
+    res : entier
+Début
+    i <- 4
+    j <- 58
+    T[0] <- 321
+    T[1] <- 437
+    T[2] <- 812
+
+    écrire(T)
+    Echange(T[0], T[1])
+    écrire(T)
+    Echange_adr(@T[0], @T[1])
+    écrire(T)
+Fin
+```
+
+```
+Fonction Echange(a, b : entier)
+    Variable
+        tmp : entier
+    Début
+        tmp <- a
+        a <- b
+        b <- tmp
+    Fin
+```
+
+:::info
+La fonction Echange n'agit en rien sur le programme principale, les paramètres sont passé par valeurs
+:::
+
+```
+Fonction Echange_adr(adra, adrb : ↑entier)
+    Variable
+        tmp : entier
+    Début
+        tmp <- ↑adra
+        ↑adra <- ↑adrb
+        ↑adrb <- tmp
+    Fin
+```

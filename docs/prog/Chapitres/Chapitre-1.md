@@ -93,3 +93,25 @@ double ConvertFtoC(double far);
 ```
 
 * Définition de tyoe
+
+
+## Opérateur
+
+### Les opérateurs logiques
+
+expr1 **&&** expr2 : teste si l'expression 1 est nulle, si non renvoie si l'expression 2 est non nulle aussi
+
+expr1 **||** expr2 : teste si l'expression 1 est nulle  si oui teste si l'expression 2 l'est aussi et renvoie faux dans ce cas et vrai sinon
+
+### Conversion de type
+
+```c
+int a = 10;
+double b = (double)a;
+```
+
+### Sizeof
+
+```c
+sizeof(int) // renvoie La taille nécéssaire pour un type int
+```
