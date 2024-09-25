@@ -1,8 +1,7 @@
 import React from 'react';
-import { useColorMode } from '@docusaurus/theme-common';
 import Link from '@docusaurus/Link';
 
-const ListMatiere = [
+const ListSubject = [
   {
     id: 'maths',
     title: 'Mathématiques',
@@ -36,7 +35,7 @@ const ListMatiere = [
 ];
 
 
-function Matiere({ id, Svg, title, link }) {
+function Subject({ id, Svg, title, link }) {
 
   return (
     <article className="col col--6 margin-bottom--lg">
@@ -55,12 +54,12 @@ function Matiere({ id, Svg, title, link }) {
   );
 }
 
-export default function HomepageFeatures() {
+export default function HomepageSubjects() {
   return (
     <article className="list_content margin-top--lg">
       <section className="list-item row">
-        {ListMatiere.map((props, idx) => (
-          <Matiere key={idx} {...props} />
+        {ListSubject.map((props, idx) => (
+          <Subject key={idx} {...props} />
         ))}
       </section>
     </article>
