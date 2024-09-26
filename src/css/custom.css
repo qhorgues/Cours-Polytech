@@ -29,6 +29,10 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .hero {
   background-color: var(--ifm-color-background-color);
   color: var(--ifm-color-primary)
