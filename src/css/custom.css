@@ -108,6 +108,14 @@
   white-space: pre-wrap;      /* current browsers */
 }
 
+.math.math-display {
+  overflow-x: auto;
+}
+
+.katex-display {
+  overflow: auto hidden;
+}
+
 @media (min-width:1250px) {
   .list_content {
     margin: 20px;
