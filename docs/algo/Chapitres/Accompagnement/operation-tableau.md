@@ -261,6 +261,118 @@ double medianne(double* tab, int n)
     </div>
 </details>
 
+## Somme d'un tableau 2D
+
+```
+Fonction somme2D(tab : Tableau[0...n-1][0...n-1], n : entier) : entier
+    Variable
+        somme, i, j : entier
+    Début
+        somme <- 0
+        Pour i de 0 à n-1 par pas de 1 faire
+            Pour j de 0 à n-1 par pas de 1 faire
+                somme <- somme + tab[i][j]
+            Finpour
+        Finpour
+        Renvoyer somme
+    Fin
+```
+
+## Nombre de valeurs non nulles dans un tableau 2D
+
+```
+Fonction nbNonNulle2D(tab : Tableau[0...n-1][0...n-1], n : entier) : entier
+    Variable
+        nbNonNulle, i, j : entier
+    Début
+        nbNonNulle <- 0
+        Pour i de 0 à n-1 par pas de 1 faire
+            Pour j de 0 à n-1 par pas de 1 faire
+                Si tab[i][j] != 0 faire
+                    nbNonNulle <- nbNonNulle + 1
+            Finpour
+        Finpour
+        Renvoyer nbNonNulle
+    Fin
+```
+
+## Triangle de Pascal
+
+```
+Fonction trianglePascal(n : entier) : Tableau[0...n-1][0...n-1]
+    Variable
+        tab : Tableau[0...n-1][0...n-1]
+        i, j : entier
+    Début
+        Pour i de 0 à n-1 par pas de 1 faire
+            tab[i][0] <- 1
+            Pour j de 1 à i-1 par pas de 1 faire
+                tab[i][j] <- tab[i-1][j-1] + tab[i-1][j]
+            Finpour
+            tab[i][i] <- 1
+            Pour j de i+1 à n-1 par pas de 1 faire
+                tab[i][j] <- 0
+            Finpour
+        Finpour
+        Renvoyer tab
+    Fin
+```
+
+<details>
+    <summary>Implémentation en C</summary>
+    <div>
+
+**En passant un tableau en paramètre**
+```c
+void trianglePascal(int (*triangle)[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        triangle[i][0] = 1;
+        for (int j = 1; j < i; j++)
+        {
+            triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j];
+        }
+        triangle[i][i] = 1;
+        for (int j = i+1; j < n; j++)
+        {
+            triangle[i][j] = 0;
+        }
+    }
+}
+```
+
+**En renvoyant un tableau alloué par malloc**
+```c
+#define offset(i, j, n) ((i)*(n) + (j))
+
+int* trianglePascal(int n)
+{
+    int *tab = malloc(sizeof(int) * n * n);
+    if (tab == NULL)
+    {
+        return NULL;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        tab[offset(i, 0, n)] = 1;
+        for (int j = 1; j < i; j++)
+        {
+            tab[offset(i, j, n)] = tab[offset(i-1, j-1, n)] + tab[offset(i-1, j, n)];
+        }
+        tab[offset(i, i, n)] = 1;
+        for (int j = i+1; j < n; j++)
+        {
+            tab[offset(i, j, n)] = 0;
+        }
+    }
+    return tab;
+}
+```
+    </div>
+</details>
+
 ## Déterminer si un mot est un palindrôme
 
 ```
@@ -444,4 +556,120 @@ Fonction estTrié(tab : Tableau[0..n-1], n : entier) : booleen
             i <- i+1
         Fintantque
         renvoyer trie
+```
+
+## Flouter/Lisser une image
+
+
+```
+Fonction filtreMoyenne(img : Tableau[0...n-1][0..m-1] entiers, n, m : entier, w : entier) : Tableau[0..n-1][0...m-1] entiers
+    Variable
+        img_s : Tableau[0...n-1][0...m-1]
+        moy : entier
+        lleft, lright, ltop, lbottom : entier
+    Début
+        Pour i de 0 à n-1 par pas de 1 faire
+            Pour j de 0 à m-1 par pas de 1 faire
+
+                Si i < w faire 
+                    ltop <- 0 
+                Sinon 
+                    ltop <- i-w
+                Finsi
+
+                Si i > n-w-1 faire 
+                    lbottom <- n-1 
+                Sinon
+                    lbottom <- i+w
+                Finsi
+
+                Si j < w faire 
+                    lleft <- 0 
+                Sinon 
+                    lleft <- i-w
+                Finsi
+
+                Si j > m-w-1 faire 
+                    lright <- n-1 
+                Sinon
+                    lright <- i+w
+                Finsi
+
+                moy <- 0
+                Pour k de ltop à lbottom par pas de 1 faire
+                    Pour l de lleft à lright par pas de 1 faire
+                        moy <- moy + img[k][l]
+                    Finpour
+                Finpour
+                img_s[i][j] <- ⌈moy / (2*w+1)²⌉
+            Finpour
+        Finpour
+        Renvoyer img_s
+    Fin
+```
+
+<details>
+    <summary>Implémentation en C</summary>
+    <div>
+
+```c
+#define POW2(x) ((x)*(x))
+
+void filtreMoyenne(int (*img)[], const int (*img_src)[], int n, int m, int w)
+{
+    for (int i = 0; i < n-1; i++)
+    {
+        for (int j = 0; j < m-1; j++)
+        {
+            int ltop, lbottom, lleft, lright;
+            int moy = 0;
+            
+            if (i < w) ltop = 0;
+            else ltop = i-w;
+
+            if (i > n-w-1) lbottom = n-1;
+            else lbottom = i+w;
+
+            if (j < w) lleft = 0;
+            else lleft = i-w;
+
+            if (j > m-w-1) lright = m-1;
+            else lright = i+w;
+
+            for (int k = ltop; k <= lbottom; k++)
+            {
+                for (int l = lleft; l <= lright; l++)
+                {
+                    moy += img_src[k][l];
+                }
+            }
+            img[i][j] = moy / POW2(2*w+1);
+        }
+    }    
+}
+```
+
+    </div>
+</details>
+
+
+## Graphe par matrice d'adjacence
+
+```mermaid
+graph TD;
+    A(0)--2-->B(1);
+    A--4-->C(2);
+    B--3-->D(3);
+    C--5-->D;
+    C--1-->E(4);
+    D--4-->E;
+    D--2-->F(5);
+    E--6-->F;
+```
+
+```
+Fonction listeSuccesseur(G : tableau[0...n-1][0..n-1] : entiers, n, m, i : entiers) : tableau[0...m-1] : entier
+    Variable
+    Début
+    Fin
 ```
