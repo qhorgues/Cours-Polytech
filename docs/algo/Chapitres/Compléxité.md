@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Chapitre 2 : Compléxité des algorithmes
 
 On peut résoudre un même problème en utilisant plusieurs algorithmes. Certains sont plus efficaces que d'autres.

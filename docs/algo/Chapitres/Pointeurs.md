@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Chapitre 3 : Pointeurs, Listes, Piles, Files
 
 ## Pointeurs
@@ -121,5 +125,115 @@ Fonction Echange_adr(adra, adrb : ↑entier)
         tmp <- ↑adra
         ↑adra <- ↑adrb
         ↑adrb <- tmp
+    Fin
+```
+
+### Arithmétique des pointeurs
+
+* On peut ajouter/soustraire un entier à un pointeur.
+* On peut calculer la différence entre deux pointeurs, on obtient un entier.
+* On peut comparer deux pointeurs.
+
+### Pointeurs vers une structure
+
+cf : TD
+
+## Listes chainées
+
+```mermaid
+flowchart LR;
+    A{ }--ptrDeb-->B[Debut];
+    B-->C[e1];
+    C-->D[e2];
+    D-->E[e3];
+    E-->F[Fin];
+    A--ptrFin-->F;
+```
+
+* Liste simplement chainée
+* Initialisation à vide
+* Insertion (en tête, en fin, à la place triée)
+* Suppression d'un maillon
+
+## Piles et Files
+
+Les Piles et les Files sont des listes où la seule qui les distingue est la façon dont les éléments sont ajoutés et retirés.
+
+**Une Pile** est une liste en gestion **LIFO**, Last In First Out.
+
+<u>**ex**</u><br/>
+insère en fin de liste <br/>
+extraire le dernier de liste
+
+Ou encore <br/>
+insère en début de liste <br/>
+extraire le premier de liste
+
+**Une File** est en gestion **FIFO**, First In First Out
+
+<u>**ex**</u><br/>
+insère en fin de liste <br/>
+extraire le premier de liste
+
+Ou bien <br/>
+insère en début de liste <br/>
+extraire le dernier de liste
+
+<u>**Exemple double chaînage**</u><br/>
+
+```
+type maillon : structure
+        cpt : entier
+        nb : entier
+        suiv : ↑maillon
+        prec : ↑maillon
+Finstructure
+```
+
+```mermaid
+flowchart LR;
+    A{ }--ptrDeb-->B[Debut];
+    B-->C[e1];
+    C-->B;
+    C-->D[e2];
+    D-->C;
+    D-->E[e3];
+    E-->D;
+    E-->F[Fin];
+    F-->E;
+    A--ptrFin-->F;
+```
+
+```
+Fonction InsereFIFO(ptrDeb, ptrFin, ptrC : ↑maillon)
+    Variable
+        ptrS : ↑maillon
+    Début
+        ptrS <- ↑ptrDeb.suiv
+        ↑ptrDeb.suiv <- ptrC
+        ↑ptrC.suiv <- ptrS
+        ↑ptrS.prec <- ptrC
+        ↑ptrC.prec <- ptrDeb
+    Fin
+```
+
+```
+Fonction ExtraireFIFO(ptrDeb, ptrFin : ↑maillon)
+    Precondition
+        On suppose que la liste n'est pas vide
+    Postcondition
+        ptrC pointe sur le dernier maillon, qui est retiré du chaînage mais non libéré
+    Variable
+        ptrS, ptrC : ↑maillon
+    Début
+        ptrC <- ↑ptrFin.prec
+        ptrS <- ↑ptrC.prec
+        ↑ptrS.suiv <- ptrFin
+        ↑ptrFin.prec <- ptrS
+
+        // éventuellement
+        ↑ptrC.prec <- Nil
+        ↑ptrC.suiv <- Nil
+
     Fin
 ```
