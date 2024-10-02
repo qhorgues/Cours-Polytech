@@ -667,9 +667,186 @@ graph TD;
     E--6-->F;
 ```
 
+### Matrice d'adjacence
+|   |   $0$  |   $1$  |   $2$  |   $3$  |   $4$  |   $5$  |
+|---|--------|--------|--------|--------|--------|--------|
+|$0$|$\infty$|   $2$  |   $4$  |$\infty$|$\infty$|$\infty$|
+|$1$|$\infty$|$\infty$|$\infty$|   $3$  |$\infty$|$\infty$|
+|$2$|$\infty$|$\infty$|$\infty$|   $5$  |   $1$  |$\infty$|
+|$3$|$\infty$|$\infty$|$\infty$|$\infty$|   $4$  |   $2$  |
+|$4$|$\infty$|$\infty$|$\infty$|$\infty$|$\infty$|   $6$  |
+|$5$|$\infty$|$\infty$|$\infty$|$\infty$|$\infty$|$\infty$|
+
+
+### Liste des succeseurs
+
 ```
-Fonction listeSuccesseur(G : tableau[0...n-1][0..n-1] : entiers, n, m, i : entiers) : tableau[0...m-1] : entier
+Fonction listeSucc(G : tableau[0...n-1][0..n-1] : entiers, n, i : entiers) : tableau[0...n-1] : entier, entier
     Variable
+        suc : Tableau[0...n-1] d'arc
+        nb : entier
+        j : entier
+        a : arc
     Début
+        nb <- 0
+        Pour j allant de 0 à n-1 par pas de 1 faire
+            Si G[i][j] != ∞ faire
+                a.succeseur <- j
+                a.longeur <- G[i][j]
+                suc[nb] <- a
+                nb <- +1
+            Finsi
+        Finpour
+        Renvoyer suc, nb
     Fin
 ```
+Complexité : $\mathcal{O}(n)$
+
+### Liste des prédeceseurs
+```
+Fonction listePred(G : tableau[0...n-1][0..n-1] : entiers, n, i : entiers) : tableau[0...n-1] : entier, entier
+    Variable
+        pre : Tableau[0...n-1]
+        nb : entier
+        j : entier
+        a : arc
+    Début
+        nb <- 0
+        Pour j allant de 0 à n-1 par pas de 1 faire
+            Si G[j][i] != ∞ faire
+                a.predeceseur <- j
+                a.longeur <- G[i][j]
+                pre[nb] <- a
+                nb <- +1
+            Finsi
+        Finpour
+        Renvoyer pre, nb
+    Fin
+```
+Complexité : $\mathcal{O}(n)$
+
+### Liste des succeseurs de successeurs
+
+```
+Fonction listeSuccSucc(G : tableau[0...n-1][0..n-1] : entiers, n, i : entiers) : tableau[0...n-1] : entier, entier
+    Variable
+        suc : Tableau[0...n-1] d'arc
+        nb : entier
+        nbf : entier
+        j, k, l : entier
+        longeur : entier
+        dbl : booleen
+        a : arc
+    Début
+        suc, nb <- listeSucc(G, n, i)
+        nbf <- nb
+        Pour k allant de 0 à nb par pas de 1 faire
+            Pour j allant de 0 à n-1 par pas de 1 faire
+                Si j != i et G[suc[k].succeseur][j] != ∞ faire
+                    dbl <- Faux
+                    longeur <- G[suc[k].succeseur][j] + suc[k].longeur
+                    Tantque l < nbf et non dbl faire
+                        Si suc[l].succeseur = j et suc[l].longeur > longeur faire
+                            suc[l].longeur <- longeur
+                            dbl <- Vrai
+                        Finsi
+                    Fintantque
+
+                    Si non dbl faire
+                        a.succeseur <- j
+                        a.longeur <- G[suc[k].succeseur][j] + suc[k].longeur
+                        suc[nbf] <- a
+                        nbf <- +1
+                    Finsi
+                Finsi
+            Finpour
+        Finpour
+        Renvoyer suc, nbf
+    Fin
+```
+Complexité : $\mathcal{O}(n^3)$
+
+### Determiner si un chemin existe
+
+```
+Fonction estChemin(G : tableau[0...n-1][0..m-1] : entiers, n, m : entiers, ch : Tableau[0...p-1], p : entier) : booléen
+    Variable
+        estChemin : booleen
+        i : entier
+    Début
+        estChemin <- Vrai
+        i <- 0
+        Tantque estChemin et i < p-1 faire
+            Si G[ch[i]][ch[i+1]] = ∞ faire
+                estChemin <- Faux
+            Finsi
+            i <- i+1
+        Fintantque
+    Fin
+```
+
+Complexité : $\mathcal{O}(p)$
+
+### Coût d'un chemin
+
+```
+Fonction coutChemin(G : tableau[0...n-1][0..n-1] : entiers, n : entiers, ch : Tableau[0...p-1], p : entier) : booléen
+    Variable
+        cout : entier
+        i : entier
+    Début
+        Pour i de 0 à p-1 faire
+            cout <- cout + G[ch[i]][ch[i+1]]
+        Fintantque
+    Fin
+```
+
+Complexité : $\mathcal{O}(p)$
+
+### Savoir si un sommet est descendant d'un autre
+
+
+```txt title="Fonction qui détermine si un sommet est prédécesseur"
+Fonction estDescendant(G : tableau[0...n-1][0..n-1] : entiers, n : entiers, ori, dest : entier) : booléen
+    Variable
+        vu : Tableau[0...n-1] booleen
+        i : entier
+    Début
+        Pour i de 0 à n-1 faire
+            vu[i] <- Faux
+        Finpour
+
+        vu[ori] <- Vrai 
+
+        renvoyer descendant(G, n, ori, dest, @vu)
+
+    Fin
+```
+
+```txt title="Fonction recursive du parcourt en profondeur"
+Fonction descendant(G : tableau[0...n-1][0..n-1] : entiers, n : entiers, ori, dest : entier, vu : ↑Tableau[0...n-1]) : booleen
+    Variable
+        pred : Tableau[0...n-1]
+        nbPred : Tableau[0...n-1]
+        trouve : booleen
+        i : entier
+    Debut
+        trouve <- Faux
+        pred, nbPred <- listePred(G, n, ori)
+        i <- 0
+
+        Tantque non trouve et i < nbPred faire
+            Si i = dest faire
+                trouve <- Vrai
+            Sinon si non ↑vu[i] faire
+                ↑vu[i] <- Vrai
+                trouve <- descendant(G, n, i, dest, vu)
+            Finsi 
+            i <- i+1
+        Fintantque
+
+        renvoyer trouve
+    Fin
+```
+        
+Complexité : $\mathcal{O}(n^2)$
