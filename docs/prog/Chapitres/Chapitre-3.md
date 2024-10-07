@@ -83,3 +83,46 @@ typedef struct
     double y;
     double z;
 } Coord3D;
+```
+
+## Le tas
+
+Le tas est la zone mémoire utilisé pour l'allocation dynamique, passant par la création et la libération de zone mémoire
+
+## Allocation dynamique
+
+### `malloc` 
+reserve une zone mémoire contigue, 
+```c
+void *malloc(size_t size);
+```
+Renvoie un pointeur sur le premier octet de la zoner mémoire ou `NULL` si l'allocation à échoué
+
+```c
+float *p_f;
+p_f = (float*)malloc(15*sizeof(float));
+if (p_f == NULL) exit(-1); 
+```
+
+### `free`
+libère la zone mémoire précédemement allouée avec malloc
+```c
+void free(void *ptr);
+```
+
+Libère la zone mémoire et ne tretourne aucune valeur
+
+```c
+float *p_f;
+p_f = (float*)malloc(15*sizeof(float));
+if (p_f == NULL) exit(-1);
+free(p_f);
+p_f = NULL; 
+```
+
+### `callloc`
+
+reserve une zone mémoire contigue où **tout les octets sont initialisé à 0**,
+```c
+void *calloc(size_t number, size_t size);
+```

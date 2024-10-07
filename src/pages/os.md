@@ -33,3 +33,10 @@ Mais le vrai parallélisme existe aussi en mettant en paralléle plusieurs proce
 
 
 # Chapitre 3 : Ordonnancement
+
+# Chapitre 4 : Concurence
+
+Sectoin critique : section protégé
+
+## Sémaphore / Mutex
+

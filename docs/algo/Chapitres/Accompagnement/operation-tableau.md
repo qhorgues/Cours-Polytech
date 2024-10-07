@@ -824,7 +824,7 @@ Fonction estDescendant(G : tableau[0...n-1][0..n-1] : entiers, n : entiers, ori,
 ```
 
 ```txt title="Fonction recursive du parcourt en profondeur"
-Fonction descendant(G : tableau[0...n-1][0..n-1] : entiers, n : entiers, ori, dest : entier, vu : ↑Tableau[0...n-1]) : booleen
+Fonction descendant(G : tableau[0...n-1][0..n-1] : entiers, n : entier, ori, dest : entiers, vu : ↑Tableau[0...n-1]) : booleen
     Variable
         pred : Tableau[0...n-1]
         nbPred : Tableau[0...n-1]
@@ -850,3 +850,160 @@ Fonction descendant(G : tableau[0...n-1][0..n-1] : entiers, n : entiers, ori, de
 ```
         
 Complexité : $\mathcal{O}(n^2)$
+
+## Problème du Sudoku
+
+### Vérification des contraintes sur les lignes
+
+```
+fonction ligne(Grille  : Tableau[0...8][0...8] d'entiers, l : entier) : booléen
+    Post Condiiton
+        Vrai si sur la ligne l la contrainte est vérifié
+    Variable
+        vu : Tableau[0...8]
+        i : entier
+        contrainte : booléen
+        elt : entier
+    Début
+        Pour i de 0 à 8 faire
+            vu[i] <- Faux
+        Finpour
+
+        contraite <- Vrai
+        i <- 0
+        Tantque contrainte Et i < 9 faire
+            elt <- Grille[l][i]
+            Si elt != -1 faire
+                Si non vu[elt] faire
+                    vu[elt] <- Vrai
+                Sinon
+                    contrainte <- Faux
+                Finsi
+            Finsi
+            i <- i+1
+        Fintantque
+        renvoyer contrainte
+    Fin
+```
+
+
+### Vérification des contraintes sur les colonnes
+
+```
+fonction colonne(Grille  : Tableau[0...8][0...8] d'entiers, c : entier) : booléen
+    Post Condiiton
+        Vrai si sur la colonne c la contrainte est vérifié
+    Variable
+        vu : Tableau[0...8]
+        i : entier
+        contrainte : booléen
+        elt : entier
+    Début
+        Pour i de 0 à 8 faire
+            vu[i] <- Faux
+        Finpour
+
+        contraite <- Vrai
+        i <- 0
+        Tantque contrainte Et i < 9 faire
+            elt <- Grille[i][c]
+            Si elt != -1 faire
+                Si non vu[elt] faire
+                    vu[elt] <- Vrai
+                Sinon
+                    contrainte <- Faux
+                Finsi
+            Finsi
+            i <- i+1
+        Fintantque
+        renvoyer contrainte
+    Fin
+```
+
+### Vérification des contraintes sur le carré
+
+```
+fonction carré(Grille  : Tableau[0...8][0...8] d'entiers, indX, indY : entier) : booléen
+    Variable
+        vu : Tableau[0...8]
+        i, j : entier
+        contrainte : booléen
+    Début
+        Pour i de 0 à 8 faire
+            vu[i] <- Faux
+        Finpour
+
+        contraite <- Vrai
+        i <- indY*3
+        Tantque contrainte Et i < indY*3+3 faire
+            j <- indX*3
+            Tantque contrainte Et j < indX*3+3 faire
+                elt <- Grille[i][j]
+                Si Grille[i][j] != -1 faire
+                    Si non vu[elt] faire
+                        vu[elt] <- Vrai
+                    Sinon
+                        contrainte <- Faux
+                    Finsi
+                Finsi
+                j <- j+1
+            Fintantque
+            i <- i+1
+        Fintantque
+        renvoyer contrainte
+    Fin
+```
+
+### Proposition d'un coup à jouer
+
+```
+fonction proposition(Grille : Tableau[0..8][0..8], x, y : entier) : Tableau[0..8], entier
+    Variable
+        vu : Tableau[0..8] booléen
+        res : Tableau[0..8]
+        nbRes : entier
+        i, j, k : entier
+        cX, cY : entier
+        carElt, ligElt, colElt : entier
+    Début
+        Pour i de 0 à 8 faire
+            vu[i] <- Faux
+        Finpour
+
+        cX <- x / 3
+        cY <- y / 3
+        i <- 0
+        Tantque i < 3 faire
+            j <- 0s
+            Tantque j < 3 faire
+                k <- 3 * i + j
+
+                carElt <- Grille[3*cy + i][3*cx + j]
+                ligElt <- Grille[y][k]
+                colElt <- Grille[k][x]
+
+                Si carElt != -1 et non vu[carElt] faire
+                    vu[carElt] <- Vrai
+                Sinonsi ligElt != -1 et non vu[ligElt] faire
+                    vu[ligElt] <- Vrai
+                Sinonsi colElt != -1 et non vu[colElt] faire
+                    vu[colElt] <- Vrai
+                Finsi
+
+                j <- j+1
+            Fintantque
+            i <- i+1
+        Fintantque
+
+        nbRes <- 0
+
+        Pour i de 0 à 8 faire
+            Si vu[i] faire
+                res[nbRes] <- i
+                nbRes <- nbRes + 1
+            Finsi
+        Finpour
+
+        renvoyer res, nbRes
+    Fin
+```
