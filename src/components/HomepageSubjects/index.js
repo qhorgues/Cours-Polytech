@@ -21,8 +21,8 @@ const ListSubject = [
     link: '/docs/category/ensemble-des-chapitres-2',
   },
   {
-    id: 'archi',
-    title: 'Architecture',
+    id: 'archi_os',
+    title: 'Architecture & OS',
     Svg: require('@site/static/img/archi-ico.svg').default,
     link: '/docs/category/ensemble-des-chapitres-3',
   },

@@ -134,9 +134,9 @@ export default {
           },
           {
             type: 'docSidebar',
-            sidebarId: 'archiSidebar',
+            sidebarId: 'archi_osSidebar',
             position: 'left',
-            label: 'Architechture',
+            label: 'Architechture & OS',
           },
           {
             type: 'docSidebar',

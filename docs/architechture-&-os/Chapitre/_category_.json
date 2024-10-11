@@ -1,0 +1,9 @@
+{
+  "label": "Ensemble des chapitres",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "title": "Architecture & OS",
+    "description": "L'ensembles des chapitres d'architechture, d'OS de 3A"
+  }
+}

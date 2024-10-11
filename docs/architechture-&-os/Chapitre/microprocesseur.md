@@ -1,9 +1,9 @@
 ---
 sidebar_position: 1
-title: Le microprocesseur
-description: Introduction à l'architecture d'un microprocesseur
+title: "Architecture : Le microprocesseur"
+description: "Introduction à l'architecture d'un microprocesseur"
 ---
-# Cours 1
+# Le microprocesseur
 
 # Architecture d'un microprocesseur
 
