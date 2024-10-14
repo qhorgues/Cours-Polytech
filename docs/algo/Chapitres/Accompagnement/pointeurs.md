@@ -74,6 +74,26 @@ Fonction creerListe( elements : Tableau[0...n-1] entiers, n : entier) : Liste
     Fin           
 ```
 
+```
+Procédure Constructeur (L : ↑maillon, a : entier)
+    Variable
+        ptr, ptrN : ↑maillon
+    Début
+        ptrN <- allouer(maillon)
+        ↑ptrN.val <- a
+        ↑ptrN.suiv <- NIL
+
+        Si L = NIL faire
+            L <- ptrN
+        Sinon
+            ptr <- L
+            Tantque ↑ptr.suiv != NIL faire
+                ptr <- ↑ptr.suiv
+            Fintantque
+            ↑ptr.suiv <- ptrN
+    Fin
+```
+
 ### La somme
 
 Ecrire une fonction qui permet de retrouver la somme des éléments de la liste chainée
@@ -94,6 +114,20 @@ Fonction sommeListe(liste : Liste) : entier
         Renvoyer sum
     Fin
 ```
+
+<details>
+    <summary>Implémentation en OCaml</summary>
+    <div>
+
+```js
+let rec sumElem l =
+    match l with
+    | [] -> 0
+    | v::rl -> v + sumElem rl
+```
+
+    </div>
+</details>
 
 ### Suppression d'un élément
 
@@ -124,3 +158,59 @@ Fonction delElemListe(liste : ↑Liste, a : entier)
         Finsi
     Fin
 ```
+
+<details>
+    <summary>Implémentation en OCaml</summary>
+    <div>
+
+```js
+let rec delElem l a =
+    match l with
+    | [] -> ()
+    | v::rl when v == a -> rl
+    | v::rl ->  v::(delElem rl a)
+```
+
+    </div>
+</details>
+
+### Le maximum de manière réccursive
+
+```txt
+Fonction maxListe(liste : ↑maillon)
+    Variable
+        v2 : entier
+    Début
+        Si liste == NIL faire
+            renvoyer -∞
+        Sinon si ↑liste.suiv == NIL
+            renvoyer ↑liste.val
+        Sinon
+            v2 <- maxListe(↑liste.suiv)
+            Si ↑liste.val > v2 faire
+                renvoyer ↑liste.val
+            Sinon
+                renvoyer v2
+    Fin
+```
+
+<details>
+    <summary>Implémentation en OCaml</summary>
+    <div>
+
+```js
+let rec maxListe l =
+    match l with
+    | [] -> -inf
+    | v::[] -> v
+    | v::rl -> (
+        let v2 = maxListe rl in
+        if v2 > v then
+            v2
+        else
+            v
+    )
+```
+
+    </div>
+</details>
