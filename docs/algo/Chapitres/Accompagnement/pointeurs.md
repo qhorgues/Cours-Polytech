@@ -176,21 +176,28 @@ let rec delElem l a =
 
 ### Le maximum de manière réccursive
 
-```txt
-Fonction maxListe(liste : ↑maillon)
-    Variable
-        v2 : entier
+```txt title="Fonction principale du Max"
+Fonction rechercheMaxi(liste : ↑maillon)
     Début
-        Si liste == NIL faire
-            renvoyer -∞
-        Sinon si ↑liste.suiv == NIL
-            renvoyer ↑liste.val
+        Si liste = NIL faire
+            Erreur
         Sinon
-            v2 <- maxListe(↑liste.suiv)
-            Si ↑liste.val > v2 faire
-                renvoyer ↑liste.val
+            renvoyer Max(L->suiv, L->elt)
+    Fin
+```
+
+```txt title="Fonction recursive de la recherche du max"
+Fonction Max(L ; liste, a : entier) Resultat entier
+    Début
+        Si L = NULL alors
+            Retourner a
+        Sinon
+            Si (L->elt > a) alors
+                Retourner Max(↑L->suiv, ↑L->elt)
             Sinon
-                renvoyer v2
+                Retourner Max(↑L->suiv, a)
+            Finsi
+        Finsi
     Fin
 ```
 
@@ -198,18 +205,90 @@ Fonction maxListe(liste : ↑maillon)
     <summary>Implémentation en OCaml</summary>
     <div>
 
-```js
-let rec maxListe l =
+```rust
+let maxListe l =
     match l with
-    | [] -> -inf
-    | v::[] -> v
-    | v::rl -> (
-        let v2 = maxListe rl in
-        if v2 > v then
-            v2
-        else
-            v
-    )
+    | [] -> invalid_arg "liste vide"
+    | v::rl -> 
+        let rec max l a =
+            match l with
+            | [] -> a
+            | x::rl when x > a -> max rl x
+            | x::rl -> max rl  a
+        in max rl v
+
+```
+
+    </div>
+</details>
+
+
+### Sac à dos
+
+```txt
+Fonction max(a, b : entier) renvoye entier
+    Début
+        Si a > b faire
+            renvoyer a
+        Sinon
+            renvoyer b
+    Fin
+```
+
+```txt 
+Fonction sacADos (n : entier, 
+                  V : Tableau[0..n-1] d'entiers, 
+                  A : Tableau[0..n-1],
+                  Vtot : entier)
+    Variable
+        F : tableau[0..n-1][0..Vtot-1]
+        i, j : entier
+    Début
+        Pour i de 0 à n-1 faire
+            Pour j de 0 à Vtot-1 faire
+                Si i = 0 faire
+                    Si j-V[i] >= 0 faire
+                        F[i][j] <- A[i]
+                    Sinon
+                        F[i][j] <- 0
+                    Finsi
+                Sinon
+                    Si j-V[i] >= 0 faire
+                        F[i][j] <- max(A[i] + F[i-1][j-V[i]], F[i-1][j])
+                    Sinon
+                        F[i][j] <- F[i-1][j]
+                    Finsi
+                Finsi
+            Finpour
+        Finpour
+        renvoyer F[n-1][Vtot-1]
+    Fin
+```
+
+
+<details>
+    <summary>Implémentation en OCaml (non finie)</summary>
+    <div>
+```rust
+
+type Member = {
+    vt: int;
+    at: int;
+    x: bool array;
+}
+
+let sacADos (vitems:int array) (aitems:int array) (maxVolume:int) (n:int) =
+    let rec allItems l i =
+        if i < n then
+            begin
+                let rec getNewPos l =
+                    match l with
+                    | [] -> begin
+                        let maillon  ={vt = vitems[i]; at = aitems[i]; x = Array::make false n}
+                in
+            end
+        in allItems [] 0
+
 ```
 
     </div>
