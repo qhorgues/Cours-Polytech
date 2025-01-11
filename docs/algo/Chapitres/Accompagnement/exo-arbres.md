@@ -147,3 +147,16 @@ graph TD;
     D---G(34)
 ```
             
+```mermaid
+flowchart LR;
+    A{ }--ptrDeb-->B[Debut];
+    B-->C[e1];
+    C-->B;
+    C-->D[e2];
+    D-->C;
+    D-->E[e3];
+    E-->D;
+    E-->F[Fin];
+    F-->E;
+    A--ptrFin-->F;
+```
