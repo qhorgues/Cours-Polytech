@@ -145,6 +145,12 @@ export default {
             label: 'Anglais',
           },
           {
+            type: 'docSidebar',
+            sidebarId: 'reseauSidebar',
+            position: 'left',
+            label: 'Réseaux',
+          },
+          {
             href: 'https://cas.univ-tours.fr/cas/login?service=https://ent.univ-tours.fr/uPortal/Login',
             label: 'ENT',
             position: 'right',

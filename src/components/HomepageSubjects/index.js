@@ -32,6 +32,12 @@ const ListSubject = [
     Svg: require('@site/static/img/en-ico.svg').default,
     link: '/docs/category/all-english-chapters',
   },
+  {
+    id: 'reseau',
+    title: 'Réseaux',
+    Svg: require('@site/static/img/reseaux-ico.svg').default,
+    link: '/docs/category/ensemble-des-chapitres-4',
+  },
 ];
 
 

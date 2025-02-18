@@ -1,0 +1,273 @@
+---
+sidebar_position: 1
+title: Introduction aux réseaux
+description: Les bases du réseaux
+---
+
+export function Red({children})
+{
+    return (
+        <span style={{color:'red'}}>
+        {children}
+        </span>
+    )
+}
+
+export function Green({children})
+{
+    return (
+        <span style={{color:'#0f4'}}>
+        {children}
+        </span>
+    )
+}
+
+export function Blue({children})
+{
+    return (
+        <span style={{color:'var(--ifm-color-primary)'}}>
+        {children}
+        </span>
+    )
+}
+
+# Introduction aux réseaux
+
+## Deux modèles
+
+### OSI
+
+* Modèle en couche
+
+|       OSI       |
+|-----------------|
+|   Application   |
+|  Présentation   |
+|     Sessoin     |
+|    Transport    |
+|     Réseau      |
+|Liason de données|
+|    Physique     |
+
+### TCI/IP
+
+|   TCI/IP  |
+|-----------|
+|Application|
+| Transport |
+| Internet  |
+|  Liason   |
+
+
+## UDP VS TCP
+
+### UDP
+* Transfert de données non fiable
+* Pas de contrôle de flux
+* Pas de contrôle de congestion
+* On peut perdre des paquets
+* Plus rapide mais 0 feddback
+
+
+## Commutation de packet
+* Les données sont envoyées par parties (paquets).
+* Pas de réservations.
+* Les paquets ont des chemins différents.
+* Les utilisateurs partagent les ressources du réseau.
+* Chaque paquet utilise toutes les ressources du lien (bande passante)
+
+## Equipements d'interconnexion
+
+### Voie de communication
+* Peut être constitué de fibre, d'air, d'un cable ethernet
+* $BR$ (Bit Release)
+
+### HUB (Concentrateur)
+* Envoie à tout le monde les messages reçus
+
+### Switch (Commutateur)
+* Envoie un message aux destinataire seulement
+
+## Canal de transmission
+
+Délai de propagation $D_p = \frac{L}{V_p}$
+* $L$ : longeur du câble
+* $V_p$ : vitesse de propagation
+
+Durée d'émission $D_e = \frac{T_m}{D}$
+* $D$ = Débit de la voie de communication
+* $T_m$ taille en bit du message
+
+* Simplex : Une voie de communication mono-sens
+* Half-Duplex : Une voie de communication à double sens
+* Full-Duplex : Deux voie de communication, une pour chaque sens
+
+## CSMA/CD
+
+Limite les risques de colision
+définie au délai de $51,2 \mu s$ pour s'assurer qu'aucun signal n'a était envoyé
+
+### La réémission
+
+Après une collision, la station attend R * 51,2s tel que
+$0 \le R < (2^i) -1$
+
+$R$ étant un entier “Random“ et $i = min(n, 10)$
+
+### La trame ethernet
+
+| Préambule | Destination | Source |  Type  |    Données     | Contrôle |
+|-----------|-------------|--------|--------|----------------|----------|
+| 8 Octets  | 6 Octets    |6 Octets|2 Octets|46 à 1000 Octets| 4 Octets |
+|Pour la synchronisation|Adresse physiques des cartes réseaux des des correspondant ||||
+
+
+### Service de délimitation
+
+#### Le fanion (Flag)
+Une suite de bit en début et fin de « données utiles » pout délimiter où commence
+et ou termine la transmission de l'information
+
+* Emetteur
+    - Information utilisateur  <Red>011010011</Red>
+    - Après délimitation <Blue>10101110</Blue> <Blue>10100011</Blue> <Red>011010011</Red> <Blue>01011001</Blue>
+* Recepteur
+    - Avant délimitation <Blue>10101110</Blue> <Blue>10100011</Blue> <Red>011010011</Red> <Blue>01011001</Blue>
+    - Information utilisateur <Red>011010011</Red>
+
+#### Le champ de comptage
+Une suite de bit avant les « données utiles » pour délimiter où commence la transmission de l'information et la taille des données à transmettre.
+
+* Emetteur
+    - Information utilisateur  <Red>011010011</Red>
+    - Après délimitation <Blue>01011001</Blue> <Red>011010011</Red>
+* Recepteur
+    - Avant délimitation <Blue>01011001</Blue> <Red>011010011</Red>
+    - Information utilisateur <Red>011010011</Red>
+
+#### HDLC
+
+HDLC ajoute un bit a 0 après une suite de 5 bit a 1 dans la suite de données.
+Le bit est enlevé coté récepeteur
+
+* Emetteur
+    - Information utilisateur  <Red>011010100</Red>
+    - Après transparence <Red>011010</Red>0<Red>100</Red>
+    - Après délimitation <Blue>10101110</Blue> <Blue>10100011</Blue> <Red>011010</Red>0<Red>100</Red> <Blue>01011001</Blue>
+* Recepteur
+    - Avant délimitation <Blue>10101110</Blue> <Blue>10100011</Blue> <Red>011010</Red>0<Red>100</Red> <Blue>01011001</Blue>
+    - Avant transparence <Red>011010</Red>0<Red>100</Red>
+    - Information utilisateur <Red>011010100</Red>
+
+Exemple du bit de parité:<br/>
+Le bit de parité est codé sur un bit<br/>
+Si le nombre de bit à 1 est :
+* Impair, sa valeur est de 1
+* Pair sa valeur est de 0
+Afin d'obtenir la parité de 1
+
+## Les reseaux virtuels
+
+### VLAN
+
+#### VLAN de niveau 1
+VLAN physiques
+
+#### VLAN de niveau 2
+* **VLAN MAC**
+* Associe les stations par leur adresses MAC
+* **MAC Address-Bases VLAN**
+* De ce fait **deux stations raccordées à un même port** (sur le même segment)
+**peuvent appartenir à deux VLAN différents**
+* **Table de communication** remplie par l'administrateur (Drag and Drop)
+* **Une station peut pappartenir à plusieurs VLAN**
+* **Indépendants des protocoles de niveau supérieur**
+* Communication **rapide**
+
+#### VLAN de niveau 3
+* **VLAN d'adresse réseau**
+* **Network address-based** VLAN
+* Constitué de stations définies par leur adresse réseau
+* **Plage d'adresses** ou par **masque de sous-réseau** (Subnet IP)
+* **Utilisateurs affectés dynamiquement** à un VLAN
+* **Une station** peut appartenir à **plusieurs VLAN** par **affectation statique**
+* Mode de fonctionnement le **moins performant**, le commutateur devant accéder
+à l'adresse de niveau 3 pour identifier le VLAN d'appartenence.
+
+#### Réalisation des VLAN
+* Protocoles
+* Application
+* Mot de passe
+* Lorsque le résau comporte plusieurs commutateurs, chque commutateur doit localiser
+toutes les machines (table d'acheminement) et connaître le VLAN d'appartenance
+de la source et du destinataire (filtrage de traffic).
+
+## Couche 3
+
+### Rôle
+* Interconnexion : entre différent réseaux locaux
+* Routage
+* Contrôle
+
+### Routeurs
+* Machines intermédiares
+* Multiples connexions
+
+### Principe de base de l'IP
+
+* Encapsulation
+* Adressage
+* Trame locale
+* Émission
+
+#### Service sans connexion
+* Protocole IP
+* Envoie de paquets (sans notification préalable)
+* Indépendance
+
+#### Structure
+
+* En-tête
+* Données
+
+##### En-tête
+
+* Version
+* Longueur total
+* Identifiation
+* Flags et Fragment Offset
+* TTL (Time to leave)
+* Protocole (TCP, UTP, ICMP, ...)
+* Checksum
+
+###### Options OP
+* Facultatives
+* Fonction
+* Utilisation
+
+###### Type de service (TOS)
+* Précédence
+* Bits DTR
+* Utilisation
+
+##### Fragmentation IP
+
+* Necessité : adopte la taille des MTU
+
+### Masque réseau
+* Définition : Nombre sur 32 bits utilisé pour identifier la partue réseau d'une adresse IP
+* Structure : Suite de 1 (partie réseau) suivie de 0 (partie (hôte)
+* Utilisation : Permet de determiner si deux adresses appartiennent au même réseau
+
+### Adresse IP spéciales
+
+* Localhost : 127.0.0.1
+* DIffusion : Tout les bits hôte à 1 pour envoyer à tous les hôtes du réseau
+* Réseau : Tout les bits hôte à 0
+
+### L'importance de la couche réseau
+
+* Interconnexion : Permet la communication entre réseau hétérogènes.
+* Adressage : Fournit un système d'adressage hiérachique et fléxible.
+* Routage : Assure l'acheminement efficace des données à travers Internet.
+* Évolution : S'adapte aux besoins croissants de l'internet moderne.
