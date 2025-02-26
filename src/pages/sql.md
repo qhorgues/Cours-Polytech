@@ -273,3 +273,151 @@ FROM `vol` AS `v1`
 INNER JOIN `vol` AS `v2` ON `v1`.`IdPilote` = `v2`.`IdPilote` AND `v2`.`IdAvion` = 3
 WHERE `v1`.`IdAvion` = 2;
 ```
+
+# Mise en oeuvre d'un SGBD
+
+## Principaux moteur de stockage
+
+**Les deux principaux:**
+
+* **InnoDB**: Moteur de table transactionnel
+* **My ISAM**: Simple et rapide. Moteur qui ne gère pas les transactions
+
+### InnoDB
+* Moteur plus récent
+* Gestion des clés étrangères
+* Moteur transactionnel
+* Plus lent en écriture que MyISAM
+* Nécessite de faire des réglages pour bien l'utiliser (administration)
+* Besoin de plus d'espace disque
+
+### MyISAM
+* Moteur historique de MySQL
+* Rapide pour les requêtes de lecture et d'écriture (`SELECT`, `INSERT`)
+* Ne gère pas les clés étrangères
+* Seul à gérer les index « Fulltext »
+* Facile à administrer
+:::note
+A utiliser si on veut juste séléctionner et inserer pas forcément de mise en relation
+:::
+
+### Les autres
+* **MEMORY**
+* **MERGE**
+* **ARCHIVE**
+* **CSV**
+
+## Architecture PHP
+### Architecture 3 Tiers
+* Couche présentation
+* Couche métier
+* Couche accès aux données
+
+#### Couche présentation
+* Partie visible pa l'utilisateur
+
+#### Couche metier
+* Partie logique
+* Application pour répondre à l'utilisation
+
+#### Couche accès aux données
+* Gère l'accès aux données (stockage, méthode d'accès), géré les outils MySQL
+
+### Logiciels mettant en oeuvre
+
+* **Apache**
+* **PHP**
+* **MySQL**
+
+## Optimiseur de requêtes
+
+L'optimiseur travaille en 2 phases:
+* **Optimisation logique** : réécriture sous une forme canonique simplifiée e toptimisée, sans tenir compte des coûts d'accès aux données
+
+* **Optimiseur physique**
+
+### Différent type de requête
+* **Requête statique**: écriture en dur dans le code éventuellement paramétrée par des variables.
+    - Optimisée une seule fois lors de la compilation du programme.
+    Ensuite requête très souvent executé
+* **Requête dynamique**
+
+### Étape d'analyse d'une requête
+* Analyse syntaxique
+* Mise sous forme canonique
+* Arbre d'opération de l'AR : plusieurs arbres possibles
+* Génération des plans d'éxecution.
+* Optimisation des plans d'execution : calcul du coût de l'éxécution
+d'une requête
+
+#### Mise sous forme canonique
+* Commutativité des jointures
+* Associativité des jointures
+* Fusion des projections
+* Regroupement des sélections
+
+# Normalisation du MLD
+
+## Dépendance fonctionnelles et formes normales
+
+### Axiomes de Armstrong
+#### Réfléxivité
+$Y \subseteq X \Rightarrow X \rightarrow Y$
+
+#### Augmentation
+$X \rightarrow Y \Rightarrow XZ \rightarrow YZ$
+
+#### Transitivité
+$X \rightarrow Y$ et $Y \rightarrow Z \Rightarrow X \rightarrow Z$
+
+### Graphe de dépendances fonctionnelle
+
+Nœuds = Attributs <br/>
+Axes = $DF$
+
+```mermaid
+flowchart LR;
+    A[Id_P]--->B[Nom];
+    A-->Status;
+```
+
+### Fermeture d'un ensemble de dépendance fonctionnelle $F$
+Notation $F^+$
+Ensemble de <u>toutes</u> les dépendances fonctionelles déductibles de F par les axiomes de armstrong
+
+### Couverture minimal de dépendance fonctionnelle $F$
+Notation $G$ <br/>
+$G$ est un sous ensemble minimum de $DF$ élémentaires permetant de générer toutes les autres. <br/>
+$G^+ = F^+$
+Toutes dépendance fonctionelles G est cannonique.
+
+### Exemple
+
+Graphe $DF$
+
+```mermaid
+flowchart LR;
+    C-->A;
+    A-->E;
+    D-->E;
+    D-->B;
+    E-->G;
+    D-->C;
+    D-->H;
+    E-->H;
+```
+
+$AD \rightarrow E \Rightarrow D \rightarrow E$
+* preuve
+    $D \rightarrow C \rightarrow A \Rightarrow D \rightarrow A$
+
+Graphe $DF$ élémentaire
+```mermaid
+flowchart LR;
+    C-->A;
+    D-->E;
+    D-->B;
+    E-->G;
+    D-->C;
+    D-->H;
+```
