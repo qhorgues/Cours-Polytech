@@ -258,20 +258,64 @@ FROM `pilote`
 LEFT OUTER JOIN `vol` ON `vol`.`IdPilote` = `pilote`.`IdPilote` 
 WHERE `vol`.`IdPilote` IS NULL;
 
-SELECT DISTINCT `pilote`.`prenomP` 
+SELECT `pilote`.`prenomP`
 FROM `pilote` 
-INNER JOIN `vol` ON `vol`.`IdPilote` = `pilote`.`IdPilote`
-WHERE `vol`.`villeD` != "Lyon";
+LEFT OUTER JOIN `vol` ON `pilote`.`IdPilote` = `vol`.`IdPilote`AND `vol`.`villeD` = "Lyon"
+WHERE `vol`.`villeD` IS NULL;
 
-SELECT DISTINCT `pilote`.`IdPilote` 
+# Piltore qui vole sur les avions 2 ou/et 3
+# OU
+SELECT DISTINCT `pilote`.`prenomP`, `pilote`.`IdPilote` 
 FROM `pilote` 
 INNER JOIN `vol` ON `vol`.`IdPilote` = `pilote`.`IdPilote` 
 WHERE `vol`.`IdAvion` IN (2,3);
 
+# ET
 SELECT DISTINCT `v1`.`IdPilote` 
 FROM `vol` AS `v1`
-INNER JOIN `vol` AS `v2` ON `v1`.`IdPilote` = `v2`.`IdPilote` AND `v2`.`IdAvion` = 3
-WHERE `v1`.`IdAvion` = 2;
+INNER JOIN `vol` AS `v2` ON `v1`.`IdPilote` = `v2`.`IdPilote`
+AND `v2`.`IdAvion` = 3
+AND `v1`.`IdAvion` = 2;
+
+# Pilote qui vole sur tout les avions
+SELECT `IdPilote`
+FROM (SELECT `IdPilote`, `IdAvion`
+      FROM `vol`
+      GROUP BY `IdPilote`,  `IdAvion`) T
+GROUP BY `IdPilote`
+HAVING COUNT(*) = (SELECT COUNT(*) FROM `avion`);
+
+# Pilote qui ne vole jamais sur Airbus
+SELECT `pilote`.`prenomP`
+FROM (SELECT `vol`.`IdPilote`
+      FROM `vol`
+      NATURAL JOIN `avion`
+      WHERE `avion`.`nomA` LIKE "Airbus%") `T`
+RIGHT OUTER JOIN `pilote` USING(`IdPilote`)
+WHERE `T`.`IdPilote` IS NULL;
+
+# Pilote qui pilote tout les Airbus
+SELECT `IdPilote`
+FROM (SELECT `IdPilote`, `IdAvion`
+      FROM `vol`
+      NATURAL JOIN `avion`
+      WHERE `avion`.`nomA` LIKE "Airbus%"
+      GROUP BY `IdPilote`,  `IdAvion`) T
+GROUP BY `IdPilote`
+HAVING COUNT(*) = (SELECT COUNT(*) FROM `avion`
+                   WHERE `nomA` LIKE "Airbus%");
+                   
+# Nom de l'avion qui vole le plus
+CREATE VIEW NbVols AS
+SELECT `IdAvion`, COUNT(*) AS `nbVol`
+FROM `vol`
+GROUP BY `IdAvion`;
+
+SELECT `avion`.`nomA`
+FROM `avion`
+INNER JOIN `NbVols` ON USING(`IdAvion`)
+AND `NbVols`.`nbVol` = (SELECT MAX(`nbVol`)
+                        FROM `NbVols`);
 ```
 
 # Mise en oeuvre d'un SGBD
