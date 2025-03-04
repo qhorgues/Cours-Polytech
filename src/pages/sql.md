@@ -435,7 +435,7 @@ $G$ est un sous ensemble minimum de $DF$ élémentaires permetant de générer t
 $G^+ = F^+$
 Toutes dépendance fonctionelles G est cannonique.
 
-### Exemple
+#### Exemple
 
 Graphe $DF$
 
@@ -465,3 +465,191 @@ flowchart LR;
     D-->C;
     D-->H;
 ```
+
+### Formes normales
+
+#### Première forme forme normale (1FN)
+
+On dit qu'une relation est en 1FN si :
+* tous les attributs qui la coomposent sont atomiques
+
+#### Deuxième forme normale (2FN)
+On dir qu'une relation est en 2FN si :
+* Elle est en 1FN
+* Toutes les DFs entre la clé et les autres attributs sont élémentaires.
+i.e tout attribut non clé primaire est dépendant de la
+totalité de la clé primaire.
+
+#### Troisième forme normale (3FN)
+On dir qu'une relation est en 3FN si :
+* Elle est en 2FN
+* Toutes les DFs entre clef et autres attributs sont **élémentaire** et **directe**
+i.e. tout attribut non clé ne dépend pas d'un
+attribut non clé.
+
+#### Frome normale de Boyce-Codd
+On dit qu'une relation est en FNBC si :
+* elle est en 3FN
+* tout attribut non clé ne doit pas déterminer une 
+partie de la clé
+
+#### Exemple de forme normale
+
+##### Ex 1
+$R(A, B, C, D)$<br/>
+$\mathcal{F} = \{A \rightarrow B; AB \rightarrow C; C \rightarrow D\}$
+
+###### 1ièr étape : graphe de DF
+
+```mermaid
+flowchart LR;
+A-->B
+A-->C
+B-->C
+C-->D
+```
+
+###### 2ième étape : recherche de la couverture minimale de $\mathcal{F}$
+
+$AB \rightarrow C$ non élémentaire car $A \rightarrow C$
+
+$A \rightarrow B \Rightarrow A \rightarrow AB$
+et $AB \rightarrow C \Rightarrow A \rightarrow C$
+
+```mermaid
+flowchart LR;
+A-->B
+A-->C
+C-->D
+```
+
+Couverture minimale = $\{A \rightarrow C, A \rightarrow B, C \rightarrow D\}$
+
+###### 3ième étape : recherche de la clé de $R(\underline{A}, B, C, D)$
+
+###### 4ième étape de R ?
+
+* 1FN : OK
+* 2FN OK 
+* 3 FN : Non 
+
+##### Ex 2
+$R(A, B, C, D, E)$<br/>
+$\mathcal{F} = \{A \rightarrow B; D \rightarrow C; D \rightarrow A; E \rightarrow D\}$
+
+###### 1ièr étape : graphe de DF
+
+```mermaid
+flowchart LR;
+A-->B
+D-->C
+D-->A
+E-->D
+```
+
+###### 2ième étape : recherche de la couverture minimale de $\mathcal{F}$
+
+$\mathcal{F}$ est une couverture minamale$
+```mermaid
+flowchart LR;
+A-->B
+D-->C
+D-->A
+E-->D
+```
+
+
+###### 3ième étape : recherche de la clé de $R(\underline{E}, A, B, C, D)$
+
+###### 4ième étape de R ?
+
+* 1FN : OK
+* 2FN OK
+* 3 FN : Non car DF entre attibuts non clé
+
+##### Ex 3
+```mermaid
+flowchart LR;
+E-->D
+D-->C
+D-->A
+A-->B
+```
+
+**<u>MLD normalisé</u>** : « approche graphique »
+
+$R_1(\underline{A}, B)$ 3FN <br/>
+$R_2(\underline{D}, A, C)$ 3FN <br/>
+$R_3(\underline{E}, D)$ 3FN
+
+### La démarche d’analyse E/A
+#### Étape 1 - Constituer le dictionnaire des données :
+* Établir la liste des propriétés à partir de tous les documents et
+fichiers.
+* Proposer des identifiants pour les « entités évidentes »
+* Utiliser des noms distincts pour des utilisations différentes
+(date_Fac et date_Com)
+* Eliminer les synonymes : Id_client et code client
+* Eliminer les polysémies : Qte pour Qte_Commandee et
+Qte_Facturee
+
+#### Étape 2 - Graphe des dépendances fonctionnelles
+* Travailler à partir des propriétés du Dictionnaire des données qui
+ne sont <u>ni calculées</u>, <u>ni composées (concaténées)</u>.
+* Etablir le graphe des Df à partir des règles de gestion du système
+d’information modélisé.
+* Rechercher sa couverture minimale.
+
+#### Étape 3 - Analyse graphique du graphe de la
+couverture minimale :
+* Les arcs terminaux obtenus à partir d’une propriété mono-
+attribut définissent **les entités**. La partie gauche mono-attribut
+est l’identifiant.
+* Les arcs restants seront **les associations**. Les propriétés non
+isolées restantes sont affectées à ces associations.
+* Les propriétés isolées sont des entités isolées.
+
+```mermaid
+flowchart LR
+subgraph Entité
+    direction TB
+    E
+end
+subgraph Entité D
+    direction TB
+    D-->C
+end
+subgraph Entité A
+    direction TB
+    A-->B
+end
+E-->D
+D-->A
+```
+### Synthèse des différentes méthode d'analyse
+
+```mermaid
+flowchart TB
+a1-->a2
+b1-->b2
+```
+
+MCD sans cardinalité = **0**
+
+```mermaid 
+flowchart LR
+subgraph " "
+    direction TB
+    a1-->a2
+    a1-->x
+end
+subgraph " "
+    direction TB
+    b1-->b2
+end
+a1-->b1
+```
+
+$R_3(\underline{\#a_1, \#b_1}, x)$<br/>
+$R_A(\underline{a_1}, a_2)$<br/>
+$R_B(\underline{b_1}, b_2)$
