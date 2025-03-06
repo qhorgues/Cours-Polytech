@@ -1,0 +1,9 @@
+{
+  "label": "Ensemble des chapitres de Java",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "title": "Langage Java",
+    "description": "L'ensembles des chapitres de Java"
+  }
+}
