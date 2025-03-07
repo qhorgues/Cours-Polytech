@@ -316,6 +316,67 @@ FROM `avion`
 INNER JOIN `NbVols` ON USING(`IdAvion`)
 AND `NbVols`.`nbVol` = (SELECT MAX(`nbVol`)
                         FROM `NbVols`);
+
+# Tout les avions partant le 23 janvier 2012
+SELECT COUNT(*)
+FROM `vol`
+WHERE DATE(`dateD`) = "2012-01-23";                        
+
+# Séléctionner tout les pilote ayant eu au moins deux formation en 2012
+SELECT `p`.`prenomP`, `p`.`IdPilote`
+FROM `pilote` AS `p`
+INNER JOIN `suivre` AS `s` 
+ON `s`.`IdPilote` = `p`.`IdPilote`
+AND YEAR(`s`.`dateF`) = "2012"
+GROUP BY `s`.`idPilote`
+HAVING COUNT(*) >= 2;
+
+# Nombre de vols partant le 21 du mois (n'importe le quel)
+SELECT COUNT(*)
+FROM `vol`
+WHERE DAY(`dateD`) = "21";
+
+#  Quels sont les noms et id des pilotes qui n’ont jamais suivi de formation 
+SELECT `pilote`.`prenomP`, `pilote`.`IdPilote`
+FROM `pilote`
+LEFT OUTER JOIN `suivre` ON `suivre`.`idPilote` = `pilote`.`IdPilote`
+WHERE `suivre`.`IdPilote` IS NULL;
+
+# Parmi les pilotes ayant déjà suivi au moins une formation, indiquer pour chacun des pilotes le nom des formations suivies et la date de suivi la plus récente. 
+
+SELECT `pilote`.`prenomP`, `formation`.`nomF`, MAX(`suivre`.`dateF`)
+FROM `pilote`
+INNER JOIN `suivre` ON `suivre`.`idPilote` = `pilote`.`IdPilote`
+INNER JOIN `formation` ON `suivre`.`idForm` = `formation`.`idForm`
+GROUP BY `suivre`.`idPilote`, `suivre`.`idForm`;
+
+# Ajouter 8 ans à toutes les dates
+UPDATE `suivre`
+SET `dateF` = DATE_ADD(`dateF`, INTERVAL 8 YEAR);
+
+# Indiquer les noms des pilotes et des formations suivies qui sont encore valides à ce jour 
+SELECT `pilote`.`prenomP`, `formation`.`nomF`, MAX(`suivre`.`dateF`)
+FROM `pilote`
+INNER JOIN `suivre` ON `suivre`.`idPilote` = `pilote`.`IdPilote`
+INNER JOIN `formation` ON `suivre`.`idForm` = `formation`.`idForm`
+AND `formation`.`duree` + YEAR(`suivre`.`dateF`) >= YEAR(CURDATE())
+GROUP BY `suivre`.`idPilote`, `suivre`.`idForm`;
+
+# Indiquer les noms des pilotes et des formations suivies qui sont encore valides à ce jour et leur date de fin de validité.
+SELECT `p`.`prenomP`, `f`.`nomF`, `s`.`dateF`, `f`.`duree`, DATE_ADD(`s`.`dateF`, INTERVAL `f`.`duree` YEAR) AS date_limit
+FROM `pilote` AS `p`
+INNER JOIN `suivre` AS `s` ON `s`.`idPilote` = `p`.`IdPilote`
+INNER JOIN `formation` AS `f` ON `s`.`idForm` = `f`.`idForm`
+AND `f`.`duree` + YEAR(`s`.`dateF`) >= YEAR(CURDATE())
+GROUP BY `s`.`idPilote`, `s`.`idForm`;
+
+# Affiche le nombre de jours moyen qui sépare le suivi d’une même formation par un pilote
+SELECT `p`.`prenomP`, `f`.`nomF`, CEIL(DATEDIFF(MAX(`s`.`dateF`), MIN(`s`.`dateF`)) / COUNT(*)) AS nb_jour_moyen_entre_formation
+FROM `pilote` AS `p`
+INNER JOIN `suivre` AS `s` ON `p`.`IdPilote` = `s`.`idPilote`
+INNER JOIN `formation` AS `f` ON `s`.`idForm` = `f`.`idForm`
+GROUP BY `s`.`idPilote`, `s`.`idForm`
+HAVING COUNT(*) >= 2;
 ```
 
 # Mise en oeuvre d'un SGBD
