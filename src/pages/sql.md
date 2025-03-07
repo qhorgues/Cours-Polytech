@@ -223,41 +223,51 @@ JOIN `vol`
 ON `pilote`.`IdPilote` = `vol`.`IdPilote` 
 AND `vol`.`villeD` = "Toulouse";
 
+# Seulement les pilotes qui volent
 SELECT `pilote`.`IdPilote`, `vol`.`IdAvion` 
 FROM `vol` 
 JOIN `pilote` ON `pilote`.`IdPilote` = `vol`.`IdPilote` 
 ORDER BY `pilote`.`IdPilote`;
 
+# Les pilote qui ne volent jamais
 SELECT `pilote`.`IdPilote`, `vol`.`IdAvion` 
 FROM `vol` 
 RIGHT OUTER JOIN `pilote` ON `pilote`.`IdPilote` = `vol`.`IdPilote` 
 ORDER BY `pilote`.`IdPilote`;
 
+# Les avions ayant la plus grande capacité
 SELECT DISTINCT `nomA` 
 FROM `avion` 
 WHERE `cap` = (SELECT MAX(`cap`) FROM `avion`);
 
+# Insert un avion A380 en spécifiant un ID
 INSERT INTO `avion` 
 VALUES (5, "Airbus A380", 450, "Paris");
 
+# Supprime l'avion d'id 5
 DELETE FROM `avion` 
 WHERE `IdAvion` = 5;
 
+# Insert un nouvelle avion A380
 INSERT INTO `avion` (`nomA`, `cap`, `base`) 
 VALUES ("Airbus A380", 450, "Paris");
 
+# Change la capacité des avions A380 à 550 places
 UPDATE `avion` 
 SET `cap` = 550
 WHERE `nomA` = "Airbus A380";
 
+# Supprime un les avions du model A380
 DELETE FROM `avion` 
 WHERE `nomA` = "Airbus A380";
 
+# Pilote qui ne vole jamais
 SELECT `pilote`.`prenomP` 
 FROM `pilote` 
 LEFT OUTER JOIN `vol` ON `vol`.`IdPilote` = `pilote`.`IdPilote` 
 WHERE `vol`.`IdPilote` IS NULL;
 
+# Pilote qui ne décolle jamais de Lyon
 SELECT `pilote`.`prenomP`
 FROM `pilote` 
 LEFT OUTER JOIN `vol` ON `pilote`.`IdPilote` = `vol`.`IdPilote`AND `vol`.`villeD` = "Lyon"
@@ -342,8 +352,8 @@ FROM `pilote`
 LEFT OUTER JOIN `suivre` ON `suivre`.`idPilote` = `pilote`.`IdPilote`
 WHERE `suivre`.`IdPilote` IS NULL;
 
-# Parmi les pilotes ayant déjà suivi au moins une formation, indiquer pour chacun des pilotes le nom des formations suivies et la date de suivi la plus récente. 
-
+# Parmi les pilotes ayant déjà suivi au moins une formation, 
+# indiquer pour chacun des pilotes le nom des formations suivies et la date de suivi la plus récente. 
 SELECT `pilote`.`prenomP`, `formation`.`nomF`, MAX(`suivre`.`dateF`)
 FROM `pilote`
 INNER JOIN `suivre` ON `suivre`.`idPilote` = `pilote`.`IdPilote`
@@ -362,8 +372,10 @@ INNER JOIN `formation` ON `suivre`.`idForm` = `formation`.`idForm`
 AND `formation`.`duree` + YEAR(`suivre`.`dateF`) >= YEAR(CURDATE())
 GROUP BY `suivre`.`idPilote`, `suivre`.`idForm`;
 
-# Indiquer les noms des pilotes et des formations suivies qui sont encore valides à ce jour et leur date de fin de validité.
-SELECT `p`.`prenomP`, `f`.`nomF`, `s`.`dateF`, `f`.`duree`, DATE_ADD(`s`.`dateF`, INTERVAL `f`.`duree` YEAR) AS date_limit
+# Indiquer les noms des pilotes et des formations suivies qui sont
+# encore valides à ce jour et leur date de fin de validité.
+SELECT `p`.`prenomP`, `f`.`nomF`, `s`.`dateF`, `f`.`duree`, 
+DATE_ADD(`s`.`dateF`, INTERVAL `f`.`duree` YEAR) AS date_limit
 FROM `pilote` AS `p`
 INNER JOIN `suivre` AS `s` ON `s`.`idPilote` = `p`.`IdPilote`
 INNER JOIN `formation` AS `f` ON `s`.`idForm` = `f`.`idForm`
@@ -371,7 +383,8 @@ AND `f`.`duree` + YEAR(`s`.`dateF`) >= YEAR(CURDATE())
 GROUP BY `s`.`idPilote`, `s`.`idForm`;
 
 # Affiche le nombre de jours moyen qui sépare le suivi d’une même formation par un pilote
-SELECT `p`.`prenomP`, `f`.`nomF`, CEIL(DATEDIFF(MAX(`s`.`dateF`), MIN(`s`.`dateF`)) / COUNT(*)) AS nb_jour_moyen_entre_formation
+SELECT `p`.`prenomP`, `f`.`nomF`, 
+CEIL(DATEDIFF(MAX(`s`.`dateF`), MIN(`s`.`dateF`)) / COUNT(*)) AS nb_jour_moyen_entre_formation
 FROM `pilote` AS `p`
 INNER JOIN `suivre` AS `s` ON `p`.`IdPilote` = `s`.`idPilote`
 INNER JOIN `formation` AS `f` ON `s`.`idForm` = `f`.`idForm`
