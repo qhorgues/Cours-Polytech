@@ -12,19 +12,19 @@ const ListSubject = [
     id: 'info',
     title: 'Programmation',
     Svg: require('@site/static/img/prog-ico.svg').default,
-    link: '/docs/category/ensemble-des-chapitres-1',
+    link: '/docs/category/ensemble-des-langagues-de-programmation',
   },
   {
     id: 'algo',
     title: 'Algorithmique',
     Svg: require('@site/static/img/algo-ico.svg').default,
-    link: '/docs/category/ensemble-des-chapitres-2',
+    link: '/docs/category/ensemble-des-chapitres-1',
   },
   {
     id: 'archi_os',
     title: 'Architecture & OS',
     Svg: require('@site/static/img/archi-ico.svg').default,
-    link: '/docs/category/ensemble-des-chapitres-3',
+    link: '/docs/category/ensemble-des-chapitres-2',
   },
   {
     id: 'en',
@@ -36,7 +36,7 @@ const ListSubject = [
     id: 'reseau',
     title: 'Réseaux',
     Svg: require('@site/static/img/reseaux-ico.svg').default,
-    link: '/docs/category/ensemble-des-chapitres-4',
+    link: '/docs/category/ensemble-des-chapitres-3',
   },
 ];
 

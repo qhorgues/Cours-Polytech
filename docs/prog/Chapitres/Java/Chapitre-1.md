@@ -117,3 +117,91 @@ int tab[] = {5, 3, 4};
 int rab2[] = tab; // FAUX
 int *tab3 = tab; // Vrai
 ```
+
+## Packaging
+
+```java
+package dessin;
+public class Circle {
+    //....
+}
+```
+
+```java
+package dessin.graph2d;
+```
+
+```java
+import dessin;
+```
+
+```java
+import dessin.graph2d.*;
+```
+
+## Héritage
+
+```java
+class Fille extends Mere {
+    //...
+}
+```
+
+Non héritable
+```java
+final class Mere {
+    //...
+}
+```
+
+Déterminer si une référence est une instance d'une classe
+```java
+instanceof
+```
+
+```java
+System.out.println(e instanceof Circle); // false
+```
+
+Toutes les classes qui n'ont pas de classe mêre sont fille de la classe `java.lang.Object`, fournissant un accès à des services comme `wait()`, `notitify()`, `toString()`, `clone()`, `equals()`.
+
+### `equals()`  VS ==
+
+```java
+Circle c1 = new Circle(25);
+Circle c2 = c1
+Circle c3 = new Circle(25);
+
+c1 == c2; // Vrai
+c1 == c3; // Faux
+```
+Compare des références
+
+* **Par défaut `equals()` compare aussi des références**
+* **À reféfinir !!**
+
+On peut faire de même avec un certain nombre de fonction comme `hashCode()`
+
+### Constructeur de la classe mêre
+
+Pour appeler le constructeur de la classe mêre on utilise `super()`
+
+`super.x` renvoie l'attribut x de la classe mêre
+`super.super.x` error
+```java
+((A)this)
+```
+renvoie l'attribut x de la class mêre mais **pour les méthodes** <br/>
+`super.m()` appele la méthode de la classe mêre <br/>
+`((B)this).m()` Appel à la méthode m de la classe courante et non la classe mêre ici B.
+
+
+### Polymorphisme
+
+## Interfaces
+
+```java
+public interface {
+    //...
+}
+```
