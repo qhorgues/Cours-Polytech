@@ -115,7 +115,7 @@ det
 \end{pmatrix}
  = ?$
 
- * $\displaystyle det(A) = \sum^n_{i=1} a_{i,j} (-1)^{i+j} det(A_{i,j}$ pour un $i$ donné
+ * $\displaystyle det(A) = \sum^n_{i=1} a_{i,j} (-1)^{i+j} det(A_{i,j})$ pour un $i$ donné
 
 <u>**Propriétés**</u>
 * $det(AB) = det(A)det(B)$
