@@ -91,7 +91,7 @@ $\forall x \in \mathbb{R}^n, x \neq 0, ^tx A x > 0$
 * $A \in \mathcal{M}_{n,n}(\mathbb{R})$ <br/>
 $\displaystyle tr(A) = \sum^n_{i=1} a_{i,i}$
 * $Tr(^tA) = Tr(A)$
-* Soit $\lambda \in \mathbb(R), Tr(\lambda A) = \alpha Tr(A)$
+* Soit $\lambda \in \mathbb(R), Tr(\lambda A) = \lambda Tr(A)$
 * $Tr(AB) = Tr(BA)$
 * $Tr(ABC) = Tr(BCA) = Tr(CAB)$ <br/>
 -> permutation circulaire
