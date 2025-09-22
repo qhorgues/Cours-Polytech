@@ -137,3 +137,18 @@ $\displaystyle tr(A) = \sum^p_{n=1} \lambda_i$ (somme des valers propres de $A$)
 
 ## Notion de métrique
 Variable **centrée réduite**
+
+|    | Taille($X$) | Poids ($Y$)|
+|----|-------------|------------|
+|$l_1$|  $1,86$    |    $80$    |
+|$l_2$|  $1,70$    |    $70$    |
+
+$IMC = \frac{m}{t^2}$
+
+$\delta(e_1, e_2) = \sqrt{(1,86-1,70)^2 + (80-70)^2}$
+
+**Solution** : normalisation !
+
+$\displaystyle \delta(e_1, e_2) = \sqrt{\left(\frac{1,86-1,70}{\sigma_{taille}}\right)^2 + \left(\frac{80-70}{\sigma_{poids}}\right)^2}$
+
+$\sigma_{taille}, \sigma_{poids} \rightarrow \textnormal{écart - type} \rightarrow$ **centrée normée**
