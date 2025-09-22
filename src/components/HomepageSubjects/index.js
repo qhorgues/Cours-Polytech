@@ -6,7 +6,7 @@ const ListSubject = [
     id: "analyses-de-donnees",
     title: "Analyses de données",
     Svg: require("@site/static/img/data-analysis.svg").default,
-    link: "/docs/category/1-maths",
+    link: "/docs/category/analyses-de-donn%C3%A9es/maths",
   },
   {
     id: "maths",
