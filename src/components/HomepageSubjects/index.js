@@ -6,7 +6,7 @@ const ListSubject = [
     id: "analyses-de-donnees",
     title: "Analyses de données",
     Svg: require("@site/static/img/data-analysis.svg").default,
-    link: "/docs/analyses-de-donn%C3%A9es/maths",
+    link: "/docs/category/ensemble-des-chapitres-1",
   },
   {
     id: "maths",
@@ -24,13 +24,13 @@ const ListSubject = [
     id: "algo",
     title: "Algorithmique",
     Svg: require("@site/static/img/algo-ico.svg").default,
-    link: "/docs/category/ensemble-des-chapitres-1",
+    link: "/docs/category/ensemble-des-chapitres-2",
   },
   {
     id: "archi_os",
     title: "Architecture & OS",
     Svg: require("@site/static/img/archi-ico.svg").default,
-    link: "/docs/category/ensemble-des-chapitres-2",
+    link: "/docs/category/ensemble-des-chapitres-3",
   },
   {
     id: "en",
@@ -42,7 +42,7 @@ const ListSubject = [
     id: "reseau",
     title: "Réseaux",
     Svg: require("@site/static/img/reseaux-ico.svg").default,
-    link: "/docs/category/ensemble-des-chapitres-3",
+    link: "/docs/category/ensemble-des-chapitres-4",
   },
 ];
 
