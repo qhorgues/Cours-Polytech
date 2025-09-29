@@ -178,23 +178,23 @@ On as une matrice carré $A \in \mathcal{M}_n(\mathbb{R})$
 
 $A u = \lambda u$
 
-$A u \rightarrow \textnormal{eigen vector}$
+$A u \rightarrow \textnormal{vecteur propre}$
 
-$\lambda u \rightarrow \textnormal{eigen value}$
+$\lambda u \rightarrow \textnormal{valeur propre}$
 
 ### Vecteur de dérivation
 
-* $\displaystyle \frac{d f(x)}{d x} =
+* $\displaystyle \frac{\partial f(x)}{\partial x} =
 \begin{pmatrix}
-  \frac{d f(x)}{d x_1} \\
-  \frac{d f(x)}{d x_2} \\
+  \frac{\partial f(x)}{\partial x_1} \\
+  \frac{\partial f(x)}{\partial x_2} \\
   \vdots \\
-  \frac{d f(x)}{d x_n}
+  \frac{\partial f(x)}{\partial x_n}
 \end{pmatrix}$
 
 * Identités
-  - $\displaystyle \frac{d^t x Ax}{d x} = 2 A x$ (Si $A$ est **symétrique**)
-  - $\displaystyle \frac{d^{t_x} x}{d x} = 2 x$
+  - $\displaystyle \frac{\partial^t x Ax}{\partial x} = 2 A x$ (Si $A$ est **symétrique**)
+  - $\displaystyle \frac{\partial^{t_x} x}{\partial x} = 2 x$
 
 ## But d'ACP
 
@@ -238,29 +238,51 @@ On veut trouver $w_1, \dots, w_n$ base **orthogonal** tel que la **variance** de
 * C'est parti commençons un simple et première aperçu pour la première dimension $w_1$
 
 $\displaystyle Var(z_i) = \frac{1}{N} \sum^w_{i=1}(z_1^i - \bar{z_1})^2$
+
 $\displaystyle = \frac{1}{N} \sum^w_{i=1}(z_1^i)^2$
-$\displaystyle = \frac{1}{N} \sum^w_{i=1}(^tw_1 x^i)^t(^tw_1 x^i)$
-$\displaystyle = \frac{1}{N} \sum^w_{i=1} ^tw_1 x^i ^tx^i ^t(^tw_1)$
-$\displaystyle = ^tw_1 \lbrack \frac{1}{N} \sum^N_{i=1} x^i ^t x^i \rbrack w_1$
-$\displaystyle ^tw_1 \Sigma w_1$, avec la matrice de covariance
+
+$\displaystyle = \frac{1}{N} \sum^w_{i=1}(w_1^{\top} x^i)(w_1^{\top} x^i)^{\top}$
+
+$\displaystyle = \frac{1}{N} \sum^w_{i=1} w_1^{\top} x^i {x^i}^{\top} (w_1^{\top})^{\top}$
+
+$\displaystyle = w_1^{\top} \lbrack \frac{1}{N} \sum^N_{i=1} x^i {x^i}^{\top} \rbrack w_1$
+
+$\displaystyle w_1^{\top} \Sigma w_1$, avec la matrice de covariance
 
 * Ok rappeler vous ce que vous voulez:
   - On maximise $Var(z_1) \Leftrightarrow \textnormal{minimiser} -Var(z_1)$
   - Soumis a $\Vert w_1 \Vert^2 = 1 \Leftrightarrow ^t w_1 w_1 -1 = 0$
 * Maintenant arrive **Lagrange**
 
-$\displaystyle L(w_1) = -Var(z_1) + \lambda (^t w_1 w_1 -1)$
-$\displaystyle = -^tw_1 \Sigma w_1 + \lambda (^t w_1 w_1 -1)$
-$\displaystyle = -^tw_1 \Sigma w_1 + \lambda ^t w_1 w_1 -\lambda$
+$ \displaystyle
+L(w_1) = -\operatorname{Var}(z_1) + \lambda \,(w_1^{\top} w_1 - 1)
+$
 
-$\displaystyle \frac{d L(w_1)}{d w_1} = -2 \Sigma w_1 + 2 \lambda w_1$
-$\displaystyle \frac{d L(w_1)}{d w_1} = \emptyset$
-$\displaystyle \Leftrightarrow -2 \Sigma w_1 + 2 \lambda w_1 = \emptyset$
-$\displaystyle \Leftrightarrow \Sigma w_1 = \lambda w_1$
+$ \displaystyle
+= -\,w_1^{\top} \Sigma w_1 + \lambda \,(w_1^{\top} w_1 - 1)
+$
+
+$ \displaystyle
+= -\,w_1^{\top} \Sigma w_1 + \lambda \, w_1^{\top} w_1 - \lambda
+$
+
+$ \displaystyle
+\frac{\partial L(w_1)}{\partial w_1} = -2 \Sigma w_1 + 2 \lambda w_1 = 0
+$
+
+$ \displaystyle
+\Leftrightarrow -2 \Sigma w_1 + 2 \lambda w_1 = 0
+$
+
+$ \displaystyle
+\Leftrightarrow \Sigma w_1 = \lambda w_1
+$
+
+
 
 $\Sigma \rightarrow$ matrice (var-covar) <br/>
-$w_1 \rightarrow$ eigenvector <br/>
-$\lambda \rightarrow eigenvalue$
+$w_1 \rightarrow$ vecteur propre <br/>
+$\lambda \rightarrow valeur propre$
 
 * $w_1$ est un vecteur d'egien de $\Sigma$ mais lequel ?
 

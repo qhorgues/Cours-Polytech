@@ -43,5 +43,6 @@ On considère 2 variables **qualitatives** $X$ et $Y$
 |$\Sigma$|$n_{+,1}$|$\dots$|$n_{+,k}$|$\dots$|$n_{+,c}$|$n$|
 
 * On considère alors
-  - la $l^{ième}$ ligne $\displaystyle \lbrace \frac{n_{l,1}}{n_{l,+}}, \dots, \frac{n_{l,k}}{n_{l,+}}, \dots, \frac{n_{l,c}}{n_{l,+}} \rbrace$
-  - la $k^{ième}$ ligne $\displaystyle \left{ \frac{n_{1,k}}{n_{+,k}}, \dots, \frac{n_{l,k}}{n_{+,k}}, \dots, \frac{n_{r,k}}{n_{+,k}} \right}$
+  - la $l^{\textnormal{ième}}$ ligne $\displaystyle \left\{ \frac{n_{l,1}}{n_{l,+}}, \dots, \frac{n_{l,k}}{n_{l,+}}, \dots, \frac{n_{l,c}}{n_{l,+}} \right\}$
+  - la $k^{\textnormal{ième}}$ ligne $\displaystyle \left\{ \frac{n_{1,k}}{n_{+,k}}, \dots, \frac{n_{l,k}}{n_{+,k}}, \dots, \frac{n_{r,k}}{n_{+,k}} \right\}$
+* La “liason” entre les deux variables est alors donné par l'étude des ressemblances et des différences entre les profils $L$ et les profils $C$
