@@ -166,3 +166,114 @@ Si on **projette** nos données (ie: individus) sur nos nouvelles variables “f
 | $e_8$    |  $1,95$ | $-4,20$|
 | $e_9$    |  $1,55$ | $2,63$ |
 
+## ACP mathematical background
+
+### Multiplicateur de lagrange
+
+Nous voulons optimiser $f(x)$ sujet a beaucoup de contrainte $g(x)=0$, on peut définir $\lambda$ nouvelle objectif $L(x, \lambda) = f(x) + \lambda g(x)$ et optimiser avec les deux, $x$ et $\lambda$
+
+### Eigervalues / vecteur
+
+On as une matrice carré $A \in \mathcal{M}_n(\mathbb{R})$
+
+$A u = \lambda u$
+
+$A u \rightarrow \textnormal{eigen vector}$
+
+$\lambda u \rightarrow \textnormal{eigen value}$
+
+### Vecteur de dérivation
+
+* $\displaystyle \frac{d f(x)}{d x} =
+\begin{pmatrix}
+  \frac{d f(x)}{d x_1} \\
+  \frac{d f(x)}{d x_2} \\
+  \vdots \\
+  \frac{d f(x)}{d x_n}
+\end{pmatrix}$
+
+* Identités
+  - $\displaystyle \frac{d^t x Ax}{d x} = 2 A x$ (Si $A$ est **symétrique**)
+  - $\displaystyle \frac{d^{t_x} x}{d x} = 2 x$
+
+## But d'ACP
+
+
+On as $x^1, x^2, \dots, x^n$ a point chaud **normalisé**
+On veut projeter $x^i \in \mathbb{R}^D$ dans $z^i \in \mathbb{R}^M$
+* $\forall i \in \lbrace 1, n \rbrace$, avec $M < D$
+* On va utilisé M **projection du vecteur** $W_1, \dots, W_{n+1} \in mathbb{R}^D$
+  - On as $\Vert W_i \Vert = 1, \forall i \in [|1, n|]$ (taille unitaires)
+  et $^tW_i W_j = \emptyset, \forall i \neq j$
+
+## A propos de la projection
+La projection de $x^n$ sur la $K^{th}$ dimension est donné par $Z_k^n = ^FW_k x^n$
+de plus $x^n$ est mappé dans $\mathbb{R}^n$ avec
+
+$\displaystyle z^n = \begin{pmatrix}
+z_1^n \\
+\vdots \\
+z_M^n \\
+\end{pmatrix} = \begin{pmatrix}
+^tw_1 x^n \\
+\vdots \\
+^tw_M x^n \\
+\end{pmatrix} = \begin{pmatrix}
+\dots & ^tw_1 & \dots \\
+      & \vdots&       \\
+\dots & ^tw_M & \dots \\
+\end{pmatrix}\begin{pmatrix}
+x_1^n \\
+\vdots \\
+x_D^n \\
+\end{pmatrix} = ^tw x^n$ avec $w = (w_1\dots w_n)$
+
+## A propos de la miximisation de la variance
+II.3
+
+## ACP allons y
+
+On veut trouver $w_1, \dots, w_n$ base **orthogonal** tel que la **variance** de la **projection** des données initial sont **maximisé**
+
+* C'est parti commençons un simple et première aperçu pour la première dimension $w_1$
+
+$\displaystyle Var(z_i) = \frac{1}{N} \sum^w_{i=1}(z_1^i - \bar{z_1})^2$
+$\displaystyle = \frac{1}{N} \sum^w_{i=1}(z_1^i)^2$
+$\displaystyle = \frac{1}{N} \sum^w_{i=1}(^tw_1 x^i)^t(^tw_1 x^i)$
+$\displaystyle = \frac{1}{N} \sum^w_{i=1} ^tw_1 x^i ^tx^i ^t(^tw_1)$
+$\displaystyle = ^tw_1 \lbrack \frac{1}{N} \sum^N_{i=1} x^i ^t x^i \rbrack w_1$
+$\displaystyle ^tw_1 \Sigma w_1$, avec la matrice de covariance
+
+* Ok rappeler vous ce que vous voulez:
+  - On maximise $Var(z_1) \Leftrightarrow \textnormal{minimiser} -Var(z_1)$
+  - Soumis a $\Vert w_1 \Vert^2 = 1 \Leftrightarrow ^t w_1 w_1 -1 = 0$
+* Maintenant arrive **Lagrange**
+
+$\displaystyle L(w_1) = -Var(z_1) + \lambda (^t w_1 w_1 -1)$
+$\displaystyle = -^tw_1 \Sigma w_1 + \lambda (^t w_1 w_1 -1)$
+$\displaystyle = -^tw_1 \Sigma w_1 + \lambda ^t w_1 w_1 -\lambda$
+
+$\displaystyle \frac{d L(w_1)}{d w_1} = -2 \Sigma w_1 + 2 \lambda w_1$
+$\displaystyle \frac{d L(w_1)}{d w_1} = \emptyset$
+$\displaystyle \Leftrightarrow -2 \Sigma w_1 + 2 \lambda w_1 = \emptyset$
+$\displaystyle \Leftrightarrow \Sigma w_1 = \lambda w_1$
+
+$\Sigma \rightarrow$ matrice (var-covar) <br/>
+$w_1 \rightarrow$ eigenvector <br/>
+$\lambda \rightarrow eigenvalue$
+
+* $w_1$ est un vecteur d'egien de $\Sigma$ mais lequel ?
+
+$\Sigma w_1 = \lambda w_1 \Leftrightarrow ^tw_1 \Sigma w_1 = \lambda ^tw_1 w_1 \Leftrightarrow Var(z_1) = \lambda$
+
+Depuis que nous voulons maximiser $var(z_1)$ nous prennons la plus grande valeur propre $\lambda$ de $\Sigma$
+
+$w_1$ est le vecteur propre associé a $\lambda$
+
+### ACP L'algorithme
+* Normaliserles données pour qu'elle soit d'éspérance de zéro
+* Calculer la covariance de la matrice
+* Trouver $D$ la valeur propre / vecteur propre
+* Choisir le $M$ le plus large
+* Projeter la données initial sur l'espace de dimension le plus faible
+* **Interprétation**
