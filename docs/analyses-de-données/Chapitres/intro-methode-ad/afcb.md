@@ -46,3 +46,10 @@ On considère 2 variables **qualitatives** $X$ et $Y$
   - la $l^{\textnormal{ième}}$ ligne $\displaystyle \left\{ \frac{n_{l,1}}{n_{l,+}}, \dots, \frac{n_{l,k}}{n_{l,+}}, \dots, \frac{n_{l,c}}{n_{l,+}} \right\}$
   - la $k^{\textnormal{ième}}$ ligne $\displaystyle \left\{ \frac{n_{1,k}}{n_{+,k}}, \dots, \frac{n_{l,k}}{n_{+,k}}, \dots, \frac{n_{r,k}}{n_{+,k}} \right\}$
 * La “liason” entre les deux variables est alors donné par l'étude des ressemblances et des différences entre les profils $L$ et les profils $C$
+
+:::note[Principe d'inertie]
+* Indice globale de qualité
+* Représente la part d'inertie expliqué par les composantes principales
+* Pour un axe $i$ donné $\displaystyle = \frac{\lambda_i}{\sum^k_{t=1} \lambda_t}$
+* Pour un plan donné $\displaystyle (i,j) = \frac{\lambda_i + \lambda_j}{\sum^k_{t=1} \lambda_t}$
+:::
