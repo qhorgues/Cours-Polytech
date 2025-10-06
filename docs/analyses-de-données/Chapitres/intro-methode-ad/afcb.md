@@ -78,7 +78,7 @@ $\displaystyle \frac{6}{24} = \frac{8}{32} = \frac{1}{4}$
 ---
 
 ### Des exploitations agricoles
-* On considère des exploitations agricoles dans la région Midi-Pyrennés (MP) 
+* On considère des exploitations agricoles dans la région Midi-Pyrennés (MP)
 * publié par la Direction Régionale de Toulouse de l'INSEE
 *Données relative à l'année 1993,
 * Arrondis à la dizaine près
@@ -87,16 +87,17 @@ $\displaystyle \frac{6}{24} = \frac{8}{32} = \frac{1}{4}$
 “Répartition des EA dans la région MPselon les départements et le SAU (Surface Agricoles Utilisées) en 1993.”
 
 
-|        | $INFOS$ | $S0510$ | $S1020$ | $S2035$ | $S3550$ | $Sup50$ | $\Sigma$ |
-|--------|---------|---------|---------|---------|---------|---------|----------|
-| $ARIE$ |  $870$  | $330$   | $730$   |  $680$  |  $470$  | $890$   |     -    |
-| $AVE$  |  $820$  | $1260$  | $2460$  | $3330$  | $2170$  | $2960$  |     -    |
-|  $HG$  | $2290$  | $1070$  | $1420$  | $1830$  | $1260$  | $2330$  |     -    |
-| $GERS$ | $1650$  |  $890$  | $1350$  | $2540$  | $2090$  | $3230$  |     -    |
-|  $LOT$ | $1940$  | $1130$  | $1750$  | $1660$  |  $770$  | $1140$  |     -    |
-|   $HP$ |
-| $TARN$ |
-|  $TG$  |
+|        | $INFOS$ | $S0510$ | $S1020$ | $S2035$ | $S3550$ | $Sup50$ |$\Sigma$|
+|--------|---------|---------|---------|---------|---------|---------|--------|
+| $ARIE$ |  $870$  | $330$   | $730$   |  $680$  |  $470$  | $890$   |    -   |
+| $AVE$  |  $820$  | $1260$  | $2460$  | $3330$  | $2170$  | $2960$  |    -   |
+|  $HG$  | $2290$  | $1070$  | $1420$  | $1830$  | $1260$  | $2330$  |    -   |
+| $GERS$ | $1650$  |  $890$  | $1350$  | $2540$  | $2090$  | $3230$  |    -   |
+|  $LOT$ | $1940$  | $1130$  | $1750$  | $1660$  |  $770$  | $1140$  |    -   |
+|   $HP$ | $2110$  | $1170$  | $1640$  | $1500$  |  $550$  |  $430$  |    -   |
+| $TARN$ | $1770$  |  $820$  | $1260$  | $2010$  |  $1680$ | $2090$  |    -   |
+|  $TG$  | $1740$  |  $920$  | $1560$  | $2210$  |   $990$ | $1240$  |    -   |
+|$\Sigma$|    -    |   -     |   -     |    -    |    -    |    -    |    -   |
 
 
 **N.B**:
@@ -118,7 +119,7 @@ $\displaystyle \frac{\displaystyle \left( n_{lh} - \frac{n_{l+}n_{+h}}{n} \right
 |$\vdots$|        |         |          |
 |$\Sigma$|        |         | $5375,49$|
 
-**e.g**: 
+**e.g**:
 * for $(1, 1) ~ (ARIE, INFOS)$ <br/>
 $\displaystyle \frac{\displaystyle \left( 870 - \left( \frac{3870 \times 13190}{73000} \right)\right)^2}{\displaystyle \frac{3870 \times 13190}{73000}} \simeq 32,50$
 
@@ -145,7 +146,7 @@ $\displaystyle \frac{\displaystyle \left( 820 - \left( \frac{13000 \times 13190}
     - “Répartition des EA selon les classes SAU dans la région MP, tous départements **confondus**”
 * barycentre (profil-$C$)
     - “Répartition des EA selon les départements de la région MP, **indépendament** des SAU”
-    
+
 * Dans chacun de ces espaces $(\mathbb{R}^L, \mathbb{R}^C)$ on peut calculer l'inertie par rapport aux barycentre
 * C'est la somme pondérée des carrésdes distances des profils à leur barycentre (formule similaireà la variance)
     - pondérée -> avec effectif marginaux
