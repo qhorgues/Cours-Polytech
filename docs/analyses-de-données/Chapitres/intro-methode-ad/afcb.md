@@ -1,9 +1,9 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 description: Analyse Factorielle des Correspondances Binaires
 ---
 
-# Analyse Factorielle des Correspondances Binaires
+# AFCB: Analyse Factorielle des Correspondances Binaires
 
 ## Introduction
 
@@ -189,3 +189,85 @@ $\sqrt{\textnormal{principal inertie}} \left[ \min (R - 1, C - 1) \right] $
 | $S0510$ |   $\dots$  |  $\dots$    |
 
 Schéma **II.4**
+
+#### Contribution
+
+* Les inerties (celles des P-L et des P-C) se décomposent de la même façon selon les axes des ACP
+* Si on se concentre sur les 2 premiers actes ($\sim 95\%$ d'inertie), on peut calculer les **parts d'inerties** dues
+  - à chaque lignes (dpts)
+  - à chaqque colonnes (SAYU)
+
+|          | dim1       | dim2       |
+|----------|------------|------------|
+| $ARIE$   | $0,001366$ | $0,044019$ |
+| $AVER$   | $0,181341$ | $0,507201$ |
+| $HG$     | $0,001434$ | $0,231410$ |
+| $GERS$   | $0,200115$ | $0,86450$  |
+| $LOT$    | $0,136049$ | $0,008024$ |
+| $HP$     | $0,421421$ | $0,018546$ |
+| $TARN$   | $0,025348$ | $0,067070$ |
+| $TG$     | $O,O32527$ | $0,037281$ |
+| $\Sigma$ | $1$ | $1$ |
+
+|          | dim1        | dim2       |
+|----------|-------------|------------|
+| $INFO$   | $0,342003$  | $0,410237$ |
+| $S0510$  | $0,087925$  | $0,034051$ |
+| $S1020$  | $0,65503$   | $0,249544$ |
+| $S2035$  | $0,008926$  | $0,164051$ |
+| $S3550$  | $0,1852276$ | $0,001284$ |
+| $Sup50$  | $0,330367$  | $0,140833$ |
+| $\Sigma$ | $1$         | $1$        |
+
+:::warning[Parts d'inertie exprimées en fréquence (d'ou la $\Sigma$ à $1$)]
+
+:::
+
+:::info[Rappel: formule contribution]
+<br/>
+$\displaystyle \frac{\displaystyle \frac{n_{l+}}{n}\left(C_l^k\right)^2}{I_K}$
+
+**eg**: Pour l'Aveyron ($l=2$) sur l'axe $1 (K=1)$
+* tableau d'inertie $I_1 = 0,05501$
+* tableau des coordonnées $C_2' = -0,236684$
+* table de contingence: $\displaystyle \frac{n_{2+}}{n} = \frac{13000}{73000}$
+:::
+
+A quoi ça sert (en $AFCB$) ?
+* à séléctionner les lignes/colonnes les plus “importantes” dans l'analyse
+  - $\rightarrow$ **liaisons** des modalités
+* à **interpréter** les axes des graphiques (+ dur en $AFCB$ qu'en $ACP$)
+
+#### Cosinus carrés
+* Qualité de représentation d'un individu sur un axe donné
+* Plus un ange est petit, plus son cosinus carré est proche de 1
+  - bonne qualité de représentation
+
+|        | dim1       | dim2       |
+|--------|------------|------------|
+| $ARIE$ | $0,046279$ | $0,404245$ |
+| $AVER$ | $0,563739$ | $0,427291$ |
+
+**exmeple:**
+* Soit le couple ($AVER$, plan factoriel)
+  - $= 0,563739 + 0,427291 = 0,9910 \sim 5,4°$
+* Soit le couple (ARIE, plan factoriel)
+  - $= 0,046279 + 0,404245 \simeq 0,4505 \sim 47,8°$
+
+#### interprétation
+
+On se concentre sur l'axe F1
+* Observation sur l'ordre des SAU'
+  - Plus un dpt se situe à “droite” de $F1$ plus il comporte des petites EA (et réciproquement)
+  - HP: présence de nombreuses petites EA (INFOS)
+    + dpt “montagnard” de la région $MP$
+* $AVER$ et $GERS$, à l'opposé:
+  présence de grandes EA
+  - $AVER$: Région de plateau/causses
+  - $GERS$: Région de plaines/collines
+    + Raisons géographiques !
+* d'autres observations similaires peuvent être réalisées sur $F1$
+
+Pour l'axe $F2 \dots$ plus difficile en général
+* “tout a été dit” sur l'axe $F1$
+* Mais parfois possible d'en tirer plus d'infos !
