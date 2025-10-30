@@ -727,3 +727,81 @@ a1-->b1
 $R_3(\underline{\#a_1, \#b_1}, x)$<br/>
 $R_A(\underline{a_1}, a_2)$<br/>
 $R_B(\underline{b_1}, b_2)$
+
+```sql
+START TRANSACTION;
+
+SELECT salary 
+FROM salaries
+NATURAL JOIN employees
+WHERE emp_no = 10002;
+
+DELETE FROM employees
+WHERE emp_no = 10002;
+
+SELECT salary 
+FROM salaries
+NATURAL JOIN employees
+WHERE emp_no = 10002;
+
+ROLLBACK;
+
+SELECT salary 
+FROM salaries
+NATURAL JOIN employees
+WHERE emp_no = 10002;
+
+
+# Ex 3
+# Tout les titres de post
+SELECT DISTINCT `title` FROM `titles`; 
+
+# Tout les employées en poste le 10 février 2025
+SELECT `e`.`first_name`, `e`.`last_name`, `t`.`title`
+FROM `employees` AS e
+NATURAL JOIN `titles` AS t
+WHERE `e`.`hire_date` <= "1985-02-10";
+
+# Lister les informations sur les employés qui ont déjà tenu 3 fonctions (title) différentes. Trier les résultats par ordre chronologique des fonctions tenues par chaque employé.
+SELECT `e`.*
+FROM `employees` AS `e`
+NATURAL JOIN `titles` AS `t`
+GROUP BY `t`.`title`
+HAVING COUNT(*) >= 3
+ORDER BY `t`.`from_date`;
+
+# Quels sont les employés qui ont obtenu plus de 10% d’augmentation en moins d’un an ?
+SELECT DISTINCT `e`.`first_name`, `e`.`last_name`
+FROM `employees` AS `e`
+NATURAL JOIN `salaries` AS `s1`
+INNER JOIN `salaries` AS `s2` ON `s2`.`emp_no` = `s1`.`emp_no`
+AND `s1`.`from_date` < `s2`.`from_date`
+AND DATEDIFF(`s2`.`from_date`, `s1`.`from_date`) < 365
+WHERE `s1`.`salary` * 1.1 < `s2`.`salary`;
+
+
+CREATE VIEW manager AS
+SELECT `e`.`emp_no`, `e`.`first_name`, `e`.`last_name`, `d`.`from_date`, `d`.`to_date`
+FROM `employees` AS `e`
+NATURAL JOIN `dept_manager` AS `d`;
+
+select `employees`.`dept_manager`.`from_date` AS `debut`,`employees`.`dept_manager`.`to_date` AS `fin` from ((`employees`.`departments` join `employees`.`dept_manager` on(`employees`.`departments`.`dept_no` = `employees`.`dept_manager`.`dept_no`)) join `employees`.`employees` on(`employees`.`dept_manager`.`emp_no` = `employees`.`employees`.`emp_no`)) where `employees`.`employees`.`first_name` = 'Xiaobin' and `employees`.`employees`.`last_name` = 'Spinelli' and `employees`.`departments`.`dept_name` = 'Customer Service'
+
+SELECT first_name, last_name, from_date, to_date
+FROM departments
+NATURAL JOIN dept_emp
+NATURAL JOIN employees, periode
+WHERE dept_name = "Customer Service" AND (to_date >= debut) AND (from_date <= fin);
+
+
+
+
+# Affichez pour chacun des responsables de département qui sont actuellement en exercice :
+son nom, prénom, le salaire minimum et le salaire maximum qu’il a pu avoir.
+SELECT employees.first_name, employees.last_name, MIN(salaries.salary), MAX(salaries.salary)
+FROM employees
+INNER JOIN dept_manager ON employees.emp_no = dept_manager.emp_no 
+AND to_date > CURRENT_DATE()
+INNER JOIN salaries ON employees.emp_no = salaries.emp_no
+GROUP BY employees.emp_no;
+```

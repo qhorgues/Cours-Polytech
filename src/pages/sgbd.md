@@ -63,3 +63,14 @@ def create(self, user):
 def __del__(self)
     self.conn.close()
 ```
+
+## Création d'une table
+
+* Le constructeur de la classe **MetaData** peut avoir des paramètres de liason et de schéma qui sont par défaut **None**
+
+### Type de données
+
+* BigInteger
+* Date
+* ...
+
