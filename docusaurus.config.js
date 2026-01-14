@@ -126,6 +126,12 @@ export default {
           },
           {
             type: "docSidebar",
+            sidebarId: "tdgSidebar",
+            position: "left",
+            label: "Théorie des graphes",
+          },
+          {
+            type: "docSidebar",
             sidebarId: "progSidebar",
             position: "left",
             label: "Programmation",

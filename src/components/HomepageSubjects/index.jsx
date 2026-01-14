@@ -9,6 +9,12 @@ const ListSubject = [
     link: "/docs/category/ensemble-des-chapitres-1",
   },
   {
+    id: "theorie-des-graphes",
+    title: "Théorie des graphes",
+    Svg: require("@site/static/img/graph-icon.svg").default,
+    link: "/docs/category/theorie-des-graphes",
+  },
+  {
     id: "maths",
     title: "Mathématiques",
     Svg: require("@site/static/img/math-ico.svg").default,
