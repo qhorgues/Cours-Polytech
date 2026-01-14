@@ -78,5 +78,3 @@ graph TD;
   (axes, coordonnées, cosinus$^2$, contributions).
 * L'interprétation se fait en $AFCB$ **MAIS** certains indicateurs ne sont pertinents/valables !
 $\rightarrow$ cela sous-entend une bonne maîtrise de l'$AFCB$
-
-## Exemple illustratif
