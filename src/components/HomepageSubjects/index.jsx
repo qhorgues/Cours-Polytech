@@ -12,7 +12,7 @@ const ListSubject = [
     id: "theorie-des-graphes",
     title: "Théorie des graphes",
     Svg: require("@site/static/img/graph-icon.svg").default,
-    link: "/docs/category/theorie-des-graphes",
+    link: "/docs/category/ensemble-des-chapitres-2",
   },
   {
     id: "maths",
@@ -30,13 +30,13 @@ const ListSubject = [
     id: "algo",
     title: "Algorithmique",
     Svg: require("@site/static/img/algo-ico.svg").default,
-    link: "/docs/category/ensemble-des-chapitres-2",
+    link: "/docs/category/ensemble-des-chapitres-3",
   },
   {
     id: "archi_os",
     title: "Architecture & OS",
     Svg: require("@site/static/img/archi-ico.svg").default,
-    link: "/docs/category/ensemble-des-chapitres-3",
+    link: "/docs/category/ensemble-des-chapitres-4",
   },
   {
     id: "en",
@@ -48,7 +48,7 @@ const ListSubject = [
     id: "reseau",
     title: "Réseaux",
     Svg: require("@site/static/img/reseaux-ico.svg").default,
-    link: "/docs/category/ensemble-des-chapitres-4",
+    link: "/docs/category/ensemble-des-chapitres-5",
   },
 ];
 
